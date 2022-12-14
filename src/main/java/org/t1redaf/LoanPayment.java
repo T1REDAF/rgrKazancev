@@ -30,10 +30,7 @@ public class LoanPayment extends Application{
     private RadioButton creditType2;
 
     public static void main(String[] args){
-
         Application.launch(args);
-
-
     }
     public void start(Stage primaryStage){
         Text instruction = new Text("Калькулятор пользовательских кредитов");
@@ -116,7 +113,6 @@ public class LoanPayment extends Application{
         primaryStage.setResizable(false);
         primaryStage.setScene(sc);
         primaryStage.show();
-
     }
 
     public void buttonCalc(){
