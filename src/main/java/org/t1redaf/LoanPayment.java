@@ -108,8 +108,7 @@ public class LoanPayment extends Application{
     }
 
     public void buttonCalc(){
-        NumberFormat currencyFormat =
-                NumberFormat.getCurrencyInstance(); //Change amount to currency format
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
 
         if(!isAcceptedNumber(principalTextField) || !isAcceptedNumber(yearTextField) || !isAcceptedNumber(interestTextField)){
             resetOutput();
@@ -123,25 +122,6 @@ public class LoanPayment extends Application{
             resetOutput();
             return;
         }
-        double monthlyPayment = 0;
-        List<Double> monthlyPayments;
-        if (creditType1.isSelected()) {
-            monthlyPayment = calcAnnMonthlyPayment(principal, months, rate);
-            monthlyPaymentTextField.setDisable(false);
-            monthlyPaymentTextField.setText(currencyFormat.format(monthlyPayment));
-            totalAmountPayableTextField.setDisable(false);
-            totalAmountPayableTextField.setText(currencyFormat.format(monthlyPayment * months));
-        }
-        else {
-            monthlyPayments = calcDeffMonthlyPayment(principal, months, rate);
-            totalAmountPayableTextField.setDisable(false);
-            monthlyPaymentTextField.setText("");
-            monthlyPaymentTextField.setDisable(true);
-            double fullCredit = monthlyPayments.stream().reduce(0d,(a,b) -> a + b);
-            totalAmountPayableTextField.setText(currencyFormat.format(fullCredit));
-            PdfCreator.create(monthlyPayments);
-        }
-
         errorLabel.setText("");
 
     }
@@ -152,23 +132,6 @@ public class LoanPayment extends Application{
         }catch (NumberFormatException e){
             return false;
         }
-    }
-    private double calcAnnMonthlyPayment(double principal, double months, double rate){
-
-        double monthRate = (rate/12) / 100.0;
-
-        return (monthRate * principal)/(1 - Math.pow((1 + monthRate), -months));
-    }
-
-    private List<Double> calcDeffMonthlyPayment(double principal, double months, double rate){
-        List<Double> payments = new ArrayList<>();
-        double mainDebtPayment = principal/months;
-        double ratePayment;
-        for (int i = 0; i < months; i++){
-            ratePayment = (principal - (mainDebtPayment * i)) * rate / 100 / 12;
-            payments.add(mainDebtPayment + ratePayment);
-        }
-        return payments;
     }
     private void resetOutput(){
         errorLabel.setText("Invalid Input!");
