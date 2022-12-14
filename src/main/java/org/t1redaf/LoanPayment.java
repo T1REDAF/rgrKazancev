@@ -46,7 +46,7 @@ public class LoanPayment extends Application{
     }
     public void start(Stage primaryStage){
         primaryStage.setTitle("Депозитный калькулятор с капитализацией");
-        primaryStage.setWidth(320);
+        primaryStage.setWidth(350);
 
         Label principalLabel = new Label("Первоначальный взнос:");
         principalLabel.setPrefWidth(normalWidth);
@@ -154,7 +154,7 @@ public class LoanPayment extends Application{
 
     private boolean isAcceptedNumber(TextField userInput){
         try{
-            Double.parseDouble(userInput.getText());
+            double x = Double.parseDouble(userInput.getText());
             return true;
         }catch (NumberFormatException e){
             return false;
