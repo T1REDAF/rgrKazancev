@@ -5,6 +5,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -15,6 +18,7 @@ import javafx.stage.Stage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.image.Image;
 
 public class LoanPayment extends Application{
 
@@ -24,6 +28,8 @@ public class LoanPayment extends Application{
     private TextField monthlyPaymentTextField;
     private TextField totalAmountPayableTextField;
     private Button calculateButton;
+    private Button resetButton;
+    private Button exitButton;
     private Label errorLabel;
     private ToggleGroup toggleGroup;
     private RadioButton creditType1;
@@ -37,6 +43,9 @@ public class LoanPayment extends Application{
         instruction.setFont(new Font(20));
         HBox topBox = new HBox(instruction);
         topBox.setPadding(new Insets(20, 10, 10, 20));
+
+        //Image image = new Image("src/main/java/org.t1redaf/icon.png");
+        //primaryStage.getIcons().add(new Image("src/main/java/org.t1redaf/icon.png"));
 
         Label creditTypeLabel = new Label("Тип кредита:");
         creditTypeLabel.setPrefWidth(100);
@@ -91,12 +100,24 @@ public class LoanPayment extends Application{
 
 
         calculateButton = new Button("Посчитать");
-        HBox buttonBox = new HBox(calculateButton);
-        buttonBox.setPadding(new Insets(20,0,0,0));
-        buttonBox.setAlignment(Pos.CENTER);
+        resetButton = new Button("Сбросить");
+        exitButton = new Button("Выход");
+        HBox buttonsBox = new HBox(calculateButton,resetButton, exitButton);
+        buttonsBox.setSpacing(30);
+        buttonsBox.setPadding(new Insets(10,0,0,0));
+        buttonsBox.setAlignment(Pos.CENTER);
+
 
         calculateButton.setOnAction( e -> {
             buttonCalc();
+        });
+
+        resetButton.setOnAction( e -> {
+            resetCalc();
+        });
+
+        exitButton.setOnAction( e -> {
+            exitCalc();
         });
 
         errorLabel = new Label();
@@ -104,7 +125,7 @@ public class LoanPayment extends Application{
         HBox errorLabelBox = new HBox(errorLabel);
         errorLabelBox.setAlignment(Pos.CENTER);
 
-        VBox vBox = new VBox(topBox, principalBox, radioButtonBox, yearBox, interestBox, monthlyPaymentBox,totalAmountPayableBox, buttonBox, errorLabelBox);
+        VBox vBox = new VBox(topBox, principalBox, radioButtonBox, yearBox, interestBox, monthlyPaymentBox,totalAmountPayableBox, buttonsBox, errorLabelBox);
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(10, 20, 10, 20));
 
@@ -153,6 +174,17 @@ public class LoanPayment extends Application{
         errorLabel.setText("");
 
     }
+
+    public void resetCalc(){
+        principalTextField.setText("");
+        interestTextField.setText("");
+        yearTextField.setText("");
+    }
+
+    public void exitCalc(){
+        System.exit(0);
+    }
+
     private boolean isAcceptedNumber(TextField userInput){
         try{
             Double.parseDouble(userInput.getText());
