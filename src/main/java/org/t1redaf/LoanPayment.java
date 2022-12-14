@@ -1,6 +1,7 @@
 package org.t1redaf;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -18,11 +18,18 @@ import java.util.List;
 
 public class LoanPayment extends Application{
 
+    private static final Font normalFont = new Font(13);
+    private static final double normalWidth = 160;
+    private static final double normalSpacing = 10;
+    private static final String[] monthActions = {"пополнение","выплата"};
+
     private TextField principalTextField;
     private TextField yearTextField;
     private TextField interestTextField;
     private TextField monthlyPaymentTextField;
     private TextField totalAmountPayableTextField;
+    private TextField monthActionTextField;
+    private ChoiceBox<String> monthActionChoiceBox;
     private Button calculateButton;
     private Label errorLabel;
     private ToggleGroup toggleGroup;
@@ -33,62 +40,46 @@ public class LoanPayment extends Application{
         Application.launch(args);
     }
     public void start(Stage primaryStage){
-        Text instruction = new Text("Калькулятор пользовательских кредитов");
-        instruction.setFont(new Font(20));
-        HBox topBox = new HBox(instruction);
-        topBox.setPadding(new Insets(20, 10, 10, 20));
+        primaryStage.setTitle("Депозитный калькулятор с капитализацией");
+        primaryStage.setWidth(320);
 
-        Label creditTypeLabel = new Label("Тип кредита:");
-        creditTypeLabel.setPrefWidth(100);
-        toggleGroup = new ToggleGroup();
-        creditType1 = new RadioButton("Аннуитетный");
-        creditType2 = new RadioButton("Дифференцированный");
-        creditType1.setToggleGroup(toggleGroup);
-        creditType2.setToggleGroup(toggleGroup);
-        toggleGroup.selectToggle(creditType1);
-        HBox radioButtonBox = new HBox(creditTypeLabel,creditType1,creditType2);
-        radioButtonBox.setSpacing(20);
-
-        Label principalLabel = new Label("Сумма кредита:");
-        principalLabel.setPrefWidth(120);
+        Label principalLabel = new Label("Первоначальный взнос:");
+        principalLabel.setPrefWidth(normalWidth);
+        principalLabel.setFont(normalFont);
         principalTextField = new TextField();
         principalLabel.setTextAlignment(TextAlignment.RIGHT);
         principalTextField.setPrefColumnCount(10);
         principalTextField.setPromptText("Principal");
         HBox principalBox = new HBox(principalLabel, principalTextField);
+        principalBox.setSpacing(normalSpacing);
 
-        Label yearLabel = new Label("Месяца:");
-        yearLabel.setPrefWidth(120);
+        Label yearLabel = new Label("Кол-во месяцов:");
+        yearLabel.setPrefWidth(normalWidth);
+        yearLabel.setFont(normalFont);
         yearTextField = new TextField();
         yearTextField.setPrefColumnCount(10);
-        yearTextField.setPromptText("Year");
+        yearTextField.setPromptText("Month");
         HBox yearBox = new HBox(yearLabel, yearTextField);
+        yearBox.setSpacing(normalSpacing);
 
         Label interestLabel = new Label("Процентная ставка:");
-        interestLabel.setPrefWidth(120);
+        interestLabel.setPrefWidth(normalWidth);
+        interestLabel.setFont(normalFont);
         interestTextField = new TextField();
-        interestTextField.setPrefColumnCount(8);
+        interestTextField.setPrefColumnCount(10);
         interestTextField.setPromptText("Interest Rate");
         HBox interestBox = new HBox(interestLabel, interestTextField);
+        interestBox.setSpacing(normalSpacing);
 
-        Label monthlyPaymentLabel = new Label("Ежемесячная выплата:");
-        monthlyPaymentLabel.setPrefWidth(120);
-        monthlyPaymentTextField = new TextField();
-        monthlyPaymentTextField.setPrefColumnCount(8);
-        monthlyPaymentTextField.setEditable(false);
-        monthlyPaymentTextField.setDisable(true);
-        HBox monthlyPaymentBox = new HBox(monthlyPaymentLabel, monthlyPaymentTextField);
-        monthlyPaymentTextField.setStyle("-fx-text-fill:green;-fx-font-weight: bold;");
-
-        Label totalAmountPayableLabel = new Label("Полная сумма кредита");
-        totalAmountPayableLabel.setPrefWidth(120);
-        totalAmountPayableTextField = new TextField();
-        totalAmountPayableTextField.setPrefColumnCount(8);
-        totalAmountPayableTextField.setEditable(false);
-        totalAmountPayableTextField.setDisable(true);
-        HBox totalAmountPayableBox = new HBox(totalAmountPayableLabel, totalAmountPayableTextField);
-        totalAmountPayableTextField.setStyle("-fx-text-fill:green;-fx-font-weight: bold;");
-
+        Label monthActionLabel = new Label("Ежемесячно:");
+        monthActionLabel.setPrefWidth(100);
+        monthActionLabel.setFont(normalFont);
+        monthActionTextField = new TextField();
+        monthActionTextField.setPrefColumnCount(4);
+        monthActionChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList(monthActions));
+        monthActionChoiceBox.setValue(monthActions[0]);
+        HBox monthActionBox = new HBox(monthActionLabel, monthActionTextField, monthActionChoiceBox);
+        monthActionBox.setSpacing(normalSpacing);
 
         calculateButton = new Button("Посчитать");
         HBox buttonBox = new HBox(calculateButton);
@@ -104,7 +95,7 @@ public class LoanPayment extends Application{
         HBox errorLabelBox = new HBox(errorLabel);
         errorLabelBox.setAlignment(Pos.CENTER);
 
-        VBox vBox = new VBox(topBox, principalBox, radioButtonBox, yearBox, interestBox, monthlyPaymentBox,totalAmountPayableBox, buttonBox, errorLabelBox);
+        VBox vBox = new VBox( principalBox, yearBox, interestBox, monthActionBox, buttonBox, errorLabelBox);
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(10, 20, 10, 20));
 
@@ -113,6 +104,7 @@ public class LoanPayment extends Application{
         primaryStage.setResizable(false);
         primaryStage.setScene(sc);
         primaryStage.show();
+
     }
 
     public void buttonCalc(){
