@@ -9,19 +9,21 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class LoanPayment extends Application{
 
-    private static final Font normalFont = new Font(13);
+    private static final Font normalFont = new Font(14);
     private static final double normalWidth = 160;
     private static final double normalSpacing = 10;
     private static final String[] monthActions = {"пополнение","выплата"};
@@ -47,6 +49,9 @@ public class LoanPayment extends Application{
     public void start(Stage primaryStage){
         primaryStage.setTitle("Депозитный калькулятор с капитализацией");
         primaryStage.setWidth(400);
+
+        Image image = new Image("file:src/main/java/org/t1redaf/icon.png");
+        primaryStage.getIcons().add(image);
 
         Label principalLabel = new Label("Первоначальный взнос:");
         principalLabel.setPrefWidth(normalWidth);
