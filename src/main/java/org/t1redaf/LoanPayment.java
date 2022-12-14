@@ -112,7 +112,7 @@ public class LoanPayment extends Application{
         HBox errorLabelBox = new HBox(errorLabel);
         errorLabelBox.setAlignment(Pos.CENTER);
 
-        VBox vBox = new VBox( principalBox, yearBox, interestBox, monthActionBox, buttonBox,buttonsBox, errorLabelBox);
+        VBox vBox = new VBox( principalBox, yearBox, interestBox, monthActionBox,buttonsBox, errorLabelBox);
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(10, 20, 10, 20));
 
