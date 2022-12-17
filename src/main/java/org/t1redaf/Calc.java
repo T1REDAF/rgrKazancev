@@ -38,12 +38,11 @@ public class Calc {
             bac = RV;
             RV = (RV * month)+pop;
             sum = sum + RV - bac;
-            procents.add(RV-bac-popCount);
-            System.out.println(RV-bac-popCount);
+            procents.add(RV-bac-pop);
             ostatok.add(RV);
-            System.out.println(RV);
         }
         //"Остаток вклада: "+ RV+" Начислено процентов: "+(sum-popCount)+" Пополнено (или снято): "+(popCount));
+        PdfCreator.create(procents,ostatok,pop);
     }
 
 }

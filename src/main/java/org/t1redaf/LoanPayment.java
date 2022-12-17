@@ -42,6 +42,7 @@ public class LoanPayment extends Application {
     public static void main(String[] args){
         Application.launch(args);
     }
+    //TODO седалть абстракный класс гетеры сетеры UML диаграмму файнал и еще еще в
     public void start(Stage primaryStage){
         primaryStage.setTitle("Депозитный калькулятор с капитализацией");
         primaryStage.setWidth(400);
@@ -84,7 +85,7 @@ public class LoanPayment extends Application {
         monthActionLabel.setPrefWidth(100);
         monthActionLabel.setFont(normalFont);
         monthActionTextField = new TextField();
-        onlyNumberTextField(monthActionTextField);
+        onlyNumberWithZeroTextField(monthActionTextField);
         monthActionTextField.setPrefColumnCount(4);
         monthActionChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList(monthActions));
         monthActionChoiceBox.setValue(monthActions[0]);
@@ -138,26 +139,26 @@ public class LoanPayment extends Application {
     }
 
     public void buttonCalc(){
-        try{int popolnenie = Integer.parseInt(monthActionTextField.getText());
-            if (monthActionChoiceBox.getValue() == monthActions[1]){
-                popolnenie = popolnenie*-1;
-            }
-            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
-            currencyFormat.setMaximumFractionDigits(2);
-            Calc call = new Calc();
-            double vznos = Double.parseDouble(principalTextField.getText());
-            double procentStav = Double.parseDouble(interestTextField.getText());
-            int srokvklad = Integer.parseInt(yearTextField.getText());
-            call.setAll(vznos, procentStav, srokvklad,popolnenie);
-            call.ras();
-            ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(Double.parseDouble(call.getRV())));
-            procentLabel.setText("Начислено процентов: "+ currencyFormat.format(Double.parseDouble(call.getProc())));
-            if (monthActionChoiceBox.getValue() == monthActions[1]){
-                changeLabel.setText("Cнято: "+  currencyFormat.format(-Double.parseDouble(call.getPop())));
-            }else {
-                changeLabel.setText("Пополнено: "+  currencyFormat.format(Double.parseDouble(call.getPop())));
-            }} catch (NumberFormatException e){}
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
+        currencyFormat.setMaximumFractionDigits(2);
+        int popolnenie = Integer.parseInt(monthActionTextField.getText());
+        double vznos = Double.parseDouble(principalTextField.getText());
+        double procentStav = Double.parseDouble(interestTextField.getText());
+        int srokvklad = Integer.parseInt(yearTextField.getText());
 
+        if (monthActionChoiceBox.getValue().equals(monthActions[1])){
+            popolnenie = popolnenie*-1;
+        }
+        Calc call = new Calc();
+        call.setAll(vznos, procentStav, srokvklad,popolnenie);
+        call.ras();
+        ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(Double.parseDouble(call.getRV())));
+        procentLabel.setText("Начислено процентов: "+ currencyFormat.format(Double.parseDouble(call.getProc())));
+        if (monthActionChoiceBox.getValue().equals(monthActions[1])){
+            changeLabel.setText("Cнято: "+  currencyFormat.format(-Double.parseDouble(call.getPop())));
+        }else {
+            changeLabel.setText("Пополнено: "+  currencyFormat.format(Double.parseDouble(call.getPop())));
+        }
     }
     public void resetCalc(){
         principalTextField.setText("");
@@ -174,9 +175,22 @@ public class LoanPayment extends Application {
     }
 
     private static void onlyNumberTextField(TextField tf){
+        if (tf==null) return;
         UnaryOperator<TextFormatter.Change> integerFilter = change -> {
             String newText = change.getControlNewText();
             if (newText.matches("([1-9][0-9]*)?")) {
+                return change;
+            }
+            return null;
+        };
+        tf.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, integerFilter));
+    }
+
+    private static void onlyNumberWithZeroTextField(TextField tf){
+        if (tf==null) return;
+        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("([0-9])*")) {
                 return change;
             }
             return null;
