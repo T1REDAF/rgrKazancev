@@ -42,6 +42,7 @@ public class LoanPayment extends Application {
     public static void main(String[] args){
         Application.launch(args);
     }
+    //TODO седалть абстракный класс гетеры сетеры UML диаграмму файнал и еще еще в
     public void start(Stage primaryStage){
         primaryStage.setTitle("Депозитный калькулятор с капитализацией");
         primaryStage.setWidth(400);

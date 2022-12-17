@@ -42,7 +42,7 @@ public class Calc {
             ostatok.add(RV);
         }
         //"Остаток вклада: "+ RV+" Начислено процентов: "+(sum-popCount)+" Пополнено (или снято): "+(popCount));
-        PdfCreator.create(procents,ostatok);
+        PdfCreator.create(procents,ostatok,pop);
     }
 
 }
