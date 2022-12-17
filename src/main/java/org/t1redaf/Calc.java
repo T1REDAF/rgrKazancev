@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calc {
-    private double RV;
+    private double RV; // остаток вклада
     private List<Double> procents = new ArrayList<>();
     private List<Double> ostatok = new ArrayList<>();
-    private double r;
-    private int n;
-    private int pop;
-    int popCount = 0;
-    double sum = 0;
+    private double r; // процентная ставка
+    private int n; // число месяцев
+    private int pop; // ежемесячный взнос
+    int popCount = 0; // накопление pop
+    double sum = 0; // для вычисления процентов
 
     public void setAll(double vznos, double procentStav, int srokvklad, int popolnenie){
         RV = vznos;
@@ -32,18 +32,14 @@ public class Calc {
         r/=100;
         double month = 1 + (r / 12);//процентная ставка
         double bac;//переменная для сохранения предыдущего значения вклада для вычитания
-
-        //RV = 100000;
-        // Math.pow((1+r/12),n);
         //в зависимости от снятия или пополнения значение pop будет отрицательным или положительным
         for (int i = 0; i<n; i++){
             popCount += pop;
             bac = RV;
             RV = (RV * month)+pop;
             sum = sum + RV - bac;
-            //if(i==0) bac=0;
-            procents.add(sum-popCount-bac);
-            System.out.println(sum);
+            procents.add(RV-bac-popCount);
+            System.out.println(RV-bac-popCount);
             ostatok.add(RV);
             System.out.println(RV);
         }
