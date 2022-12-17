@@ -98,7 +98,7 @@ public class LoanPayment extends Application {
 
         ostatokLabel = new Label("Остаток вклада: ");
         procentLabel = new Label("Начислено процентов: ");
-        changeLabel = new Label("Пополнено: ");
+        changeLabel = new Label("Пополнено/снято: ");
         VBox monthActionBox3 = new VBox(ostatokLabel,procentLabel,changeLabel);
         monthActionBox3.setSpacing(10);
         monthActionBox3.setPadding(new Insets(0,0,0,0));
