@@ -15,7 +15,7 @@ public class PdfCreator {
 
     public static final String FONT = "C:\\\\WINDOWS\\Fonts\\\\ARIAL.TTF";
 
-    public static void create(List<Double> payments) {
+    public static void create(List<Double> procents, List<Double> ostatok) {
         Document doc = new Document();
 
         try {
@@ -23,14 +23,13 @@ public class PdfCreator {
 
             doc.open();
 
-            int i = 0;
-            for (double payment : payments) {
-                i++;
+            for (int i=0; i<ostatok.size(); i++) {
+
                 doc.add(new Paragraph(String.format(
-                        "%s-ый платеж = %s  руб.",
+                        "%s-ый месяц --- Добавлено процентов: %s руб. --- Остаток вклада: %s руб.",
                         i,
                         new DecimalFormat("### ###"
-                        ).format(payment)), FontFactory.getFont(FONT,"CP1251",true)));
+                        ).format(ostatok.get(i)),procents.get(i)), FontFactory.getFont(FONT,"CP1251",true)));
             }
             doc.close();
             writer.close();
