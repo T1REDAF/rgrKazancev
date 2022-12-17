@@ -30,10 +30,8 @@ public class Calc {
         return popString;
     }
     public void ras(){
-
         double month = 1 + (r / 12);//процентная ставка
         double bac;//переменная для сохранения предыдущего значения вклада для вычитания
-        pop = -500;//пополнение или снятие
 
         //RV = 100000;
         // Math.pow((1+r/12),n);

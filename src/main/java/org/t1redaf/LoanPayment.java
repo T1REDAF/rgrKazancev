@@ -10,16 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.text.NumberFormat;
-
 
 public class LoanPayment extends Application{
 
@@ -42,6 +37,9 @@ public class LoanPayment extends Application{
     private ToggleGroup toggleGroup;
     private RadioButton creditType1;
     private RadioButton creditType2;
+    private Label ostatokLabel;
+    private Label procentLabel;
+    private Label changeLabel;
 
     public static void main(String[] args){
         Application.launch(args);
@@ -91,6 +89,20 @@ public class LoanPayment extends Application{
         HBox monthActionBox = new HBox(monthActionLabel, monthActionTextField, monthActionChoiceBox);
         monthActionBox.setSpacing(normalSpacing);
 
+        Label calculationResultsLabel = new Label("Результаты расчета: ");
+        HBox monthActionBox2 = new HBox(calculationResultsLabel);
+        monthActionBox2.setPadding(new Insets(-20,0,0,0));
+        monthActionBox2.setAlignment(Pos.CENTER);
+
+        ostatokLabel = new Label("Остаток вклада: ");
+        procentLabel = new Label("Начислено процентов: ");
+        changeLabel = new Label("Пополнено: ");
+        VBox monthActionBox3 = new VBox(ostatokLabel,procentLabel,changeLabel);
+        monthActionBox3.setSpacing(10);
+        monthActionBox3.setPadding(new Insets(0,0,0,0));
+        monthActionBox3.setAlignment(Pos.TOP_LEFT);
+
+
         calculateButton = new Button("Посчитать");
         resetButton = new Button("Сбросить");
         exitButton = new Button("Выход");
@@ -117,7 +129,12 @@ public class LoanPayment extends Application{
         HBox errorLabelBox = new HBox(errorLabel);
         errorLabelBox.setAlignment(Pos.CENTER);
 
-        VBox vBox = new VBox( principalBox, yearBox, interestBox, monthActionBox,buttonsBox, errorLabelBox);
+//        errorLabel = new Label();
+//        errorLabel.setStyle("-fx-background-color: red;-fx-text-fill:white;-fx-font-weight: bold;");
+//        HBox errorLabelBox = new HBox(errorLabel);
+//        errorLabelBox.setAlignment(Pos.CENTER);
+
+        VBox vBox = new VBox( principalBox, yearBox, interestBox, monthActionBox,buttonsBox, errorLabelBox, monthActionBox2,monthActionBox3);
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(10, 20, 10, 20));
 
@@ -129,20 +146,31 @@ public class LoanPayment extends Application{
     }
 
     public void buttonCalc(){
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
+          Calc call = new Calc();
+          double vznos = Double.parseDouble(principalTextField.getText());
+          double procentStav = Double.parseDouble(interestTextField.getText());
+          int srokvklad = Integer.parseInt(yearTextField.getText());
+          int popa = Integer.parseInt(monthActionTextField.getText());
+          call.setAll(vznos, procentStav, srokvklad,popa);
+          call.ras();
+          ostatokLabel.setText("Остаток вклада: "+ call.getRV());
+          procentLabel.setText("Начислено процентов: "+ call.getProc());
+          changeLabel.setText("Пополнено/снято: "+ call.getPop());
 
-        if(!isAcceptedNumber(principalTextField) || !isAcceptedNumber(yearTextField) || !isAcceptedNumber(interestTextField)){
-            resetOutput();
-            return;
-        }
-        double principal = Double.parseDouble(principalTextField.getText());
-        double months = Double.parseDouble(yearTextField.getText());
-        double rate = Double.parseDouble(interestTextField.getText());
-
-        if((principal <= 0 )|| (months <= 0 )|| (rate <= 0 )){
-            resetOutput();
-            return;
-        }
+//        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
+//
+//        if(!isAcceptedNumber(principalTextField) || !isAcceptedNumber(yearTextField) || !isAcceptedNumber(interestTextField)){
+//            resetOutput();
+//            return;
+//        }
+//        double principal = Double.parseDouble(principalTextField.getText());
+//        double months = Double.parseDouble(yearTextField.getText());
+//        double rate = Double.parseDouble(interestTextField.getText());
+//
+//        if((principal <= 0 )|| (months <= 0 )|| (rate <= 0 )){
+//            resetOutput();
+//            return;
+//        }
         errorLabel.setText("");
 
     }
@@ -166,8 +194,8 @@ public class LoanPayment extends Application{
         }
     }
     private void resetOutput(){
-        errorLabel.setText("Invalid Input!");
-        monthlyPaymentTextField.setText("");//If there is a previous content, clear that.
+        errorLabel.setText("Некорректный ввод!");
+        monthlyPaymentTextField.setText("");
         totalAmountPayableTextField.setText("");
         monthlyPaymentTextField.setDisable(true);
         totalAmountPayableTextField.setDisable(true);

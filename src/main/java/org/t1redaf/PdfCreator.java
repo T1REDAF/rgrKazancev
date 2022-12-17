@@ -21,7 +21,6 @@ public class PdfCreator {
         try {
             PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream("Payments.pdf"));
 
-
             doc.open();
 
             int i = 0;
