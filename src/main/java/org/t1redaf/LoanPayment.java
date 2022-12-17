@@ -189,7 +189,7 @@ public class LoanPayment extends Application {
         if (tf==null) return;
         UnaryOperator<TextFormatter.Change> integerFilter = change -> {
             String newText = change.getControlNewText();
-            if (newText.matches("([0-9])?")) {
+            if (newText.matches("([0-9])*")) {
                 return change;
             }
             return null;
