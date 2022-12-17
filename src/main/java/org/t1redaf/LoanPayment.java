@@ -139,7 +139,7 @@ public class LoanPayment extends Application {
 
     public void buttonCalc(){
         int popolnenie = Integer.parseInt(monthActionTextField.getText());
-        if (monthActionChoiceBox.getValue() == monthActions[1]){
+        if (monthActionChoiceBox.getValue().equals(monthActions[1])){
             popolnenie = popolnenie*-1;
         }
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
@@ -152,7 +152,7 @@ public class LoanPayment extends Application {
         call.ras();
         ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(Double.parseDouble(call.getRV())));
         procentLabel.setText("Начислено процентов: "+ currencyFormat.format(Double.parseDouble(call.getProc())));
-        if (monthActionChoiceBox.getValue() == monthActions[1]){
+        if (monthActionChoiceBox.getValue().equals(monthActions[1])){
             changeLabel.setText("Cнято: "+  currencyFormat.format(-Double.parseDouble(call.getPop())));
         }else {
             changeLabel.setText("Пополнено: "+  currencyFormat.format(Double.parseDouble(call.getPop())));
@@ -173,6 +173,7 @@ public class LoanPayment extends Application {
     }
 
     private static void onlyNumberTextField(TextField tf){
+        if (tf==null) return;
         UnaryOperator<TextFormatter.Change> integerFilter = change -> {
             String newText = change.getControlNewText();
             if (newText.matches("([1-9][0-9]*)?")) {

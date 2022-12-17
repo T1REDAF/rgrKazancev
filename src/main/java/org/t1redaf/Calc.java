@@ -1,7 +1,12 @@
 package org.t1redaf;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Calc {
     private double RV;
+    private List<Double> procents = new ArrayList<>();
+    private List<Double> ostatok = new ArrayList<>();
     private double r;
     private int n;
     private int pop;
@@ -36,6 +41,11 @@ public class Calc {
             bac = RV;
             RV = (RV * month)+pop;
             sum = sum + RV - bac;
+            //if(i==0) bac=0;
+            procents.add(sum-popCount-bac);
+            System.out.println(sum);
+            ostatok.add(RV);
+            System.out.println(RV);
         }
         //"Остаток вклада: "+ RV+" Начислено процентов: "+(sum-popCount)+" Пополнено (или снято): "+(popCount));
     }

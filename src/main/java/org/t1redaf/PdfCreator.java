@@ -29,7 +29,7 @@ public class PdfCreator {
                 doc.add(new Paragraph(String.format(
                         "%s-ый платеж = %s  руб.",
                         i,
-                        new DecimalFormat("###,###"
+                        new DecimalFormat("### ###"
                         ).format(payment)), FontFactory.getFont(FONT,"CP1251",true)));
             }
             doc.close();
