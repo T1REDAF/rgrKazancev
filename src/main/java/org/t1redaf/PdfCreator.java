@@ -27,7 +27,7 @@ public class PdfCreator {
 
                 doc.add(new Paragraph(String.format(
                         "%s-ый месяц --- Добавлено процентов: %s руб. --- Остаток вклада: %s руб.",
-                        i,
+                        i+1,
                         new DecimalFormat("### ###"
                         ).format(ostatok.get(i)),procents.get(i)), FontFactory.getFont(FONT,"CP1251",true)));
             }
