@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
 import java.text.NumberFormat;
 
 public class LoanPayment extends Application {
@@ -178,32 +177,34 @@ public class LoanPayment extends Application {
         errorLabel.setText("");
 
     }
-
     public void resetCalc(){
         principalTextField.setText("");
         interestTextField.setText("");
         yearTextField.setText("");
         monthActionTextField.setText("");
+        ostatokLabel.setText("Остаток вклада: ");
+        procentLabel.setText("Начислено процентов: ");
+        changeLabel.setText("Пополнено/снято: ");
     }
 
     public void exitCalc(){
         System.exit(0);
     }
 
-    private boolean isAcceptedNumber(TextField userInput){
-        try{
-            double x = Double.parseDouble(userInput.getText());
-            return true;
-        }catch (NumberFormatException e){
-            return false;
-        }
-    }
-    private void resetOutput(){
-        errorLabel.setText("Некорректный ввод!");
-        monthlyPaymentTextField.setText("");
-        totalAmountPayableTextField.setText("");
-        monthlyPaymentTextField.setDisable(true);
-        totalAmountPayableTextField.setDisable(true);
-    }
+//    private boolean isAcceptedNumber(TextField userInput){
+//        try{
+//            double x = Double.parseDouble(userInput.getText());
+//            return true;
+//        }catch (NumberFormatException e){
+//            return false;
+//        }
+//    }
+//    private void resetOutput(){
+//        errorLabel.setText("Некорректный ввод!");
+//        monthlyPaymentTextField.setText("");
+//        totalAmountPayableTextField.setText("");
+//        monthlyPaymentTextField.setDisable(true);
+//        totalAmountPayableTextField.setDisable(true);
+//    }
 
 }

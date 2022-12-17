@@ -7,26 +7,23 @@ public class Calc {
     private int pop;
     int popCount = 0;
     double sum = 0;
-    double otvet1;
-    double otvet2;
-    int otvet3;
 
-    public void setAll(double a, double b, int c, int d){
-        RV = a;
-        r = b;
-        n = c;
-        pop = d;
+    public void setAll(double vznos, double procentStav, int srokvklad, int popolnenie){
+        RV = vznos;
+        r = procentStav;
+        n = srokvklad;
+        pop = popolnenie;
     }
     public String getRV(){
-        String RVString = Double.toString(otvet1);
+        String RVString = Double.toString(RV);
         return RVString;
     }
     public String getProc(){
-        String proc = Double.toString(otvet2);
+        String proc = Double.toString(sum-popCount);
         return proc;
     }
     public String getPop(){
-        String popString = Integer.toString(otvet3);
+        String popString = Integer.toString(popCount);
         return popString;
     }
     public void ras(){
@@ -42,10 +39,7 @@ public class Calc {
             RV = (RV * month)+pop;
             sum = sum + RV - bac;
         }
-        otvet1=RV;
-        otvet2=sum-popCount;
-        otvet3=popCount;
-        //System.out.println("Остаток вклада: "+ RV+" Начислено процентов: "+(sum-popCount)+" Пополнено (или снято): "+(popCount));
+        //"Остаток вклада: "+ RV+" Начислено процентов: "+(sum-popCount)+" Пополнено (или снято): "+(popCount));
     }
 
 }
