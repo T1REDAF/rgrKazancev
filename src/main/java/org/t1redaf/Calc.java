@@ -15,18 +15,16 @@ public class Calc {
         pop = popolnenie;
     }
     public String getRV(){
-        String RVString = Double.toString(RV);
-        return RVString;
+        return Double.toString(RV);
     }
     public String getProc(){
-        String proc = Double.toString(sum-popCount);
-        return proc;
+        return Double.toString(sum-popCount);
     }
     public String getPop(){
-        String popString = Integer.toString(popCount);
-        return popString;
+        return Integer.toString(popCount);
     }
     public void ras(){
+        r/=100;
         double month = 1 + (r / 12);//процентная ставка
         double bac;//переменная для сохранения предыдущего значения вклада для вычитания
 
