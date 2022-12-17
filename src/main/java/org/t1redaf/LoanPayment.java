@@ -119,7 +119,6 @@ public class LoanPayment extends Application {
         buttonsBox.setPadding(new Insets(10,0,0,0));
         buttonsBox.setAlignment(Pos.CENTER);
 
-
         calculateButton.setOnAction( e -> {
             buttonCalc();
         });
@@ -136,11 +135,7 @@ public class LoanPayment extends Application {
         errorLabel.setStyle("-fx-background-color: red;-fx-text-fill:white;-fx-font-weight: bold;");
         HBox errorLabelBox = new HBox(errorLabel);
         errorLabelBox.setAlignment(Pos.CENTER);
-
-//        errorLabel = new Label();
-//        errorLabel.setStyle("-fx-background-color: red;-fx-text-fill:white;-fx-font-weight: bold;");
-//        HBox errorLabelBox = new HBox(errorLabel);
-//        errorLabelBox.setAlignment(Pos.CENTER);
+        
 
         VBox vBox = new VBox( principalBox, yearBox, interestBox, monthActionBox,buttonsBox, errorLabelBox, monthActionBox2,monthActionBox3);
         vBox.setSpacing(10);
@@ -154,35 +149,25 @@ public class LoanPayment extends Application {
     }
 
     public void buttonCalc(){
+        int popolnenie = Integer.parseInt(monthActionTextField.getText());
+        if (monthActionChoiceBox.getValue() == monthActions[1]){
+            popolnenie = popolnenie*-1;
+        }
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
         currencyFormat.setMaximumFractionDigits(2);
         Calc call = new Calc();
         double vznos = Double.parseDouble(principalTextField.getText());
         double procentStav = Double.parseDouble(interestTextField.getText());
         int srokvklad = Integer.parseInt(yearTextField.getText());
-        int popa = Integer.parseInt(monthActionTextField.getText());
-        call.setAll(vznos, procentStav, srokvklad,popa);
+        call.setAll(vznos, procentStav, srokvklad,popolnenie);
         call.ras();
         ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(Double.parseDouble(call.getRV())));
         procentLabel.setText("Начислено процентов: "+ currencyFormat.format(Double.parseDouble(call.getProc())));
-        changeLabel.setText("Пополнено/снято: "+  currencyFormat.format(Double.parseDouble(call.getPop())));
-
-//        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
-//
-//        if(!isAcceptedNumber(principalTextField) || !isAcceptedNumber(yearTextField) || !isAcceptedNumber(interestTextField)){
-//            resetOutput();
-//            return;
-//        }
-//        double principal = Double.parseDouble(principalTextField.getText());
-//        double months = Double.parseDouble(yearTextField.getText());
-//        double rate = Double.parseDouble(interestTextField.getText());
-//
-//        if((principal <= 0 )|| (months <= 0 )|| (rate <= 0 )){
-//            resetOutput();
-//            return;
-//        }
-        errorLabel.setText("");
-
+        if (monthActionChoiceBox.getValue() == monthActions[1]){
+            changeLabel.setText("Cнято: "+  currencyFormat.format(-Double.parseDouble(call.getPop())));
+        }else {
+            changeLabel.setText("Пополнено: "+  currencyFormat.format(Double.parseDouble(call.getPop())));
+        }
     }
     public void resetCalc(){
         principalTextField.setText("");
