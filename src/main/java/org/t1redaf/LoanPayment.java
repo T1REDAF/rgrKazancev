@@ -16,7 +16,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-public class LoanPayment extends Application{
+import java.text.NumberFormat;
+
+public class LoanPayment extends Application {
 
     private static final Font normalFont = new Font(14);
     private static final double normalWidth = 160;
@@ -146,16 +148,18 @@ public class LoanPayment extends Application{
     }
 
     public void buttonCalc(){
-          Calc call = new Calc();
-          double vznos = Double.parseDouble(principalTextField.getText());
-          double procentStav = Double.parseDouble(interestTextField.getText());
-          int srokvklad = Integer.parseInt(yearTextField.getText());
-          int popa = Integer.parseInt(monthActionTextField.getText());
-          call.setAll(vznos, procentStav, srokvklad,popa);
-          call.ras();
-          ostatokLabel.setText("Остаток вклада: "+ call.getRV());
-          procentLabel.setText("Начислено процентов: "+ call.getProc());
-          changeLabel.setText("Пополнено/снято: "+ call.getPop());
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
+        currencyFormat.setMaximumFractionDigits(2);
+        Calc call = new Calc();
+        double vznos = Double.parseDouble(principalTextField.getText());
+        double procentStav = Double.parseDouble(interestTextField.getText());
+        int srokvklad = Integer.parseInt(yearTextField.getText());
+        int popa = Integer.parseInt(monthActionTextField.getText());
+        call.setAll(vznos, procentStav, srokvklad,popa);
+        call.ras();
+        ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(Double.parseDouble(call.getRV())));
+        procentLabel.setText("Начислено процентов: "+ currencyFormat.format(Double.parseDouble(call.getProc())));
+        changeLabel.setText("Пополнено/снято: "+  currencyFormat.format(Double.parseDouble(call.getPop())));
 
 //        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
 //
@@ -179,6 +183,7 @@ public class LoanPayment extends Application{
         principalTextField.setText("");
         interestTextField.setText("");
         yearTextField.setText("");
+        monthActionTextField.setText("");
     }
 
     public void exitCalc(){
