@@ -15,7 +15,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
+
 import java.text.NumberFormat;
+import java.util.function.UnaryOperator;
 
 public class LoanPayment extends Application {
 
@@ -56,6 +59,7 @@ public class LoanPayment extends Application {
         principalLabel.setPrefWidth(normalWidth);
         principalLabel.setFont(normalFont);
         principalTextField = new TextField();
+        onlyNumberTextField(principalTextField);
         principalLabel.setTextAlignment(TextAlignment.RIGHT);
         principalTextField.setPrefColumnCount(10);
         principalTextField.setPromptText("Principal");
@@ -66,6 +70,7 @@ public class LoanPayment extends Application {
         yearLabel.setPrefWidth(normalWidth);
         yearLabel.setFont(normalFont);
         yearTextField = new TextField();
+        onlyNumberTextField(yearTextField);
         yearTextField.setPrefColumnCount(10);
         yearTextField.setPromptText("Month");
         HBox yearBox = new HBox(yearLabel, yearTextField);
@@ -75,6 +80,7 @@ public class LoanPayment extends Application {
         interestLabel.setPrefWidth(normalWidth);
         interestLabel.setFont(normalFont);
         interestTextField = new TextField();
+        onlyNumberTextField(interestTextField);
         interestTextField.setPrefColumnCount(10);
         interestTextField.setPromptText("Interest Rate");
         HBox interestBox = new HBox(interestLabel, interestTextField);
@@ -84,6 +90,7 @@ public class LoanPayment extends Application {
         monthActionLabel.setPrefWidth(100);
         monthActionLabel.setFont(normalFont);
         monthActionTextField = new TextField();
+        onlyNumberTextField(monthActionTextField);
         monthActionTextField.setPrefColumnCount(4);
         monthActionChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList(monthActions));
         monthActionChoiceBox.setValue(monthActions[0]);
@@ -189,6 +196,17 @@ public class LoanPayment extends Application {
 
     public void exitCalc(){
         System.exit(0);
+    }
+
+    private static void onlyNumberTextField(TextField tf){
+        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("([1-9][0-9]*)?")) {
+                return change;
+            }
+            return null;
+        };
+        tf.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, integerFilter));
     }
 
 //    private boolean isAcceptedNumber(TextField userInput){
