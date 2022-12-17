@@ -30,17 +30,11 @@ public class LoanPayment extends Application {
     private TextField principalTextField;
     private TextField yearTextField;
     private TextField interestTextField;
-    private TextField monthlyPaymentTextField;
-    private TextField totalAmountPayableTextField;
     private TextField monthActionTextField;
     private ChoiceBox<String> monthActionChoiceBox;
     private Button calculateButton;
     private Button resetButton;
     private Button exitButton;
-    private Label errorLabel;
-    private ToggleGroup toggleGroup;
-    private RadioButton creditType1;
-    private RadioButton creditType2;
     private Label ostatokLabel;
     private Label procentLabel;
     private Label changeLabel;
@@ -99,7 +93,7 @@ public class LoanPayment extends Application {
 
         Label calculationResultsLabel = new Label("Результаты расчета: ");
         HBox monthActionBox2 = new HBox(calculationResultsLabel);
-        monthActionBox2.setPadding(new Insets(-20,0,0,0));
+        monthActionBox2.setPadding(new Insets(10,0,0,0));
         monthActionBox2.setAlignment(Pos.CENTER);
 
         ostatokLabel = new Label("Остаток вклада: ");
@@ -131,13 +125,8 @@ public class LoanPayment extends Application {
             exitCalc();
         });
 
-        errorLabel = new Label();
-        errorLabel.setStyle("-fx-background-color: red;-fx-text-fill:white;-fx-font-weight: bold;");
-        HBox errorLabelBox = new HBox(errorLabel);
-        errorLabelBox.setAlignment(Pos.CENTER);
-        
 
-        VBox vBox = new VBox( principalBox, yearBox, interestBox, monthActionBox,buttonsBox, errorLabelBox, monthActionBox2,monthActionBox3);
+        VBox vBox = new VBox( principalBox, yearBox, interestBox, monthActionBox,buttonsBox, monthActionBox2,monthActionBox3);
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(10, 20, 10, 20));
 
@@ -194,20 +183,5 @@ public class LoanPayment extends Application {
         tf.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, integerFilter));
     }
 
-//    private boolean isAcceptedNumber(TextField userInput){
-//        try{
-//            double x = Double.parseDouble(userInput.getText());
-//            return true;
-//        }catch (NumberFormatException e){
-//            return false;
-//        }
-//    }
-//    private void resetOutput(){
-//        errorLabel.setText("Некорректный ввод!");
-//        monthlyPaymentTextField.setText("");
-//        totalAmountPayableTextField.setText("");
-//        monthlyPaymentTextField.setDisable(true);
-//        totalAmountPayableTextField.setDisable(true);
-//    }
 
 }
