@@ -169,15 +169,15 @@ public class LoanPayment extends Application {
             Calc call = new Calc();
             call.setAll(vznos, procentStav, srokvklad,popolnenie,replenishmentOrPayment);
             call.ras();
-            ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(Double.parseDouble(call.getRV())));
-            procentLabel.setText("Начислено процентов: "+ currencyFormat.format(Double.parseDouble(call.getProc())));
+            ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(call.getRV()));
+            procentLabel.setText("Начислено процентов: "+ currencyFormat.format(call.getProc()));
             if (monthActionChoiceBox.getValue().equals(monthActions[1])){
                 if (Integer.parseInt(monthActionTextField.getText()) == 0){
                     changeLabel.setText("Cнято: 0");
                 }else {
-                    changeLabel.setText("Cнято: "+  currencyFormat.format(-Double.parseDouble(call.getPop())));}
+                    changeLabel.setText("Cнято: "+  currencyFormat.format(-call.getPop()));}
             }else {
-                changeLabel.setText("Пополнено: "+  currencyFormat.format(Double.parseDouble(call.getPop())));
+                changeLabel.setText("Пополнено: "+  currencyFormat.format(call.getPop()));
             }
         }catch(NumberFormatException e){}
     }

@@ -21,14 +21,14 @@ public class Calc {
         pop = popolnenie;
         status = replenishmentOrPayment;
     }
-    public String getRV(){
-        return Double.toString(RV);
+    public double getRV(){
+        return RV;
     }
-    public String getProc(){
-        return Double.toString(sum-popCount);
+    public double getProc(){
+        return sum-popCount;
     }
-    public String getPop(){
-        return Integer.toString(popCount);
+    public int getPop(){
+        return popCount;
     }
     public void ras(){
         r/=100;
