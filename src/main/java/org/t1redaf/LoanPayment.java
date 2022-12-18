@@ -38,6 +38,8 @@ public class LoanPayment extends Application {
     private Label ostatokLabel;
     private Label procentLabel;
     private Label changeLabel;
+    private Button infoButton;
+    private String replenishmentOrPayment;
 
     public static void main(String[] args){
         Application.launch(args);
@@ -49,6 +51,11 @@ public class LoanPayment extends Application {
 
         Image image = new Image("file:src/main/java/org/t1redaf/icon.png");
         primaryStage.getIcons().add(image);
+
+        infoButton = new Button("О разработчиках");
+        HBox infoButtonsBox = new HBox(infoButton);
+        infoButtonsBox.setPadding(new Insets(10,0,10,0));
+        infoButtonsBox.setAlignment(Pos.CENTER);
 
         Label principalLabel = new Label("Первоначальный взнос:");
         principalLabel.setPrefWidth(normalWidth);
@@ -114,6 +121,14 @@ public class LoanPayment extends Application {
         buttonsBox.setPadding(new Insets(10,0,0,0));
         buttonsBox.setAlignment(Pos.CENTER);
 
+        //TODO Спросить у Динара что тут нах происходит
+        infoButton.setOnAction( e -> {
+            primaryStage.close();
+            Stage primaryStageNew = new Stage();
+            InfoDevelopers infoShow = new InfoDevelopers();
+            infoShow.start(primaryStageNew);
+        });
+
         calculateButton.setOnAction( e -> {
             buttonCalc();
         });
@@ -127,7 +142,7 @@ public class LoanPayment extends Application {
         });
 
 
-        VBox vBox = new VBox( principalBox, yearBox, interestBox, monthActionBox,buttonsBox, monthActionBox2,monthActionBox3);
+        VBox vBox = new VBox(infoButtonsBox, principalBox, yearBox, interestBox, monthActionBox,buttonsBox, monthActionBox2,monthActionBox3);
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(10, 20, 10, 20));
 
@@ -139,26 +154,33 @@ public class LoanPayment extends Application {
     }
 
     public void buttonCalc(){
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
-        currencyFormat.setMaximumFractionDigits(2);
-        int popolnenie = Integer.parseInt(monthActionTextField.getText());
-        double vznos = Double.parseDouble(principalTextField.getText());
-        double procentStav = Double.parseDouble(interestTextField.getText());
-        int srokvklad = Integer.parseInt(yearTextField.getText());
+        try {
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
+            currencyFormat.setMaximumFractionDigits(2);
+            int popolnenie = Integer.parseInt(monthActionTextField.getText());
+            double vznos = Double.parseDouble(principalTextField.getText());
+            double procentStav = Double.parseDouble(interestTextField.getText());
+            int srokvklad = Integer.parseInt(yearTextField.getText());
 
-        if (monthActionChoiceBox.getValue().equals(monthActions[1])){
-            popolnenie = popolnenie*-1;
-        }
-        Calc call = new Calc();
-        call.setAll(vznos, procentStav, srokvklad,popolnenie);
-        call.ras();
-        ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(Double.parseDouble(call.getRV())));
-        procentLabel.setText("Начислено процентов: "+ currencyFormat.format(Double.parseDouble(call.getProc())));
-        if (monthActionChoiceBox.getValue().equals(monthActions[1])){
-            changeLabel.setText("Cнято: "+  currencyFormat.format(-Double.parseDouble(call.getPop())));
-        }else {
-            changeLabel.setText("Пополнено: "+  currencyFormat.format(Double.parseDouble(call.getPop())));
-        }
+            if (monthActionChoiceBox.getValue().equals(monthActions[1])){
+                popolnenie = popolnenie*-1;
+                replenishmentOrPayment = "Выплаты";
+            }else {replenishmentOrPayment = "Пополнения";}
+
+            Calc call = new Calc();
+            call.setAll(vznos, procentStav, srokvklad,popolnenie,replenishmentOrPayment);
+            call.ras();
+            ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(Double.parseDouble(call.getRV())));
+            procentLabel.setText("Начислено процентов: "+ currencyFormat.format(Double.parseDouble(call.getProc())));
+            if (monthActionChoiceBox.getValue().equals(monthActions[1])){
+                if (Integer.parseInt(monthActionTextField.getText()) == 0){
+                    changeLabel.setText("Cнято: 0");
+                }else {
+                    changeLabel.setText("Cнято: "+  currencyFormat.format(-Double.parseDouble(call.getPop())));}
+            }else {
+                changeLabel.setText("Пополнено: "+  currencyFormat.format(Double.parseDouble(call.getPop())));
+            }
+        }catch(NumberFormatException e){}
     }
     public void resetCalc(){
         principalTextField.setText("");

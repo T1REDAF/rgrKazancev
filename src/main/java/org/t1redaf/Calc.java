@@ -12,12 +12,14 @@ public class Calc {
     private int pop; // ежемесячный взнос
     int popCount = 0; // накопление pop
     double sum = 0; // для вычисления процентов
+    private String status;
 
-    public void setAll(double vznos, double procentStav, int srokvklad, int popolnenie){
+    public void setAll(double vznos, double procentStav, int srokvklad, int popolnenie, String replenishmentOrPayment){
         RV = vznos;
         r = procentStav;
         n = srokvklad;
         pop = popolnenie;
+        status = replenishmentOrPayment;
     }
     public String getRV(){
         return Double.toString(RV);
@@ -42,7 +44,7 @@ public class Calc {
             ostatok.add(RV);
         }
         //"Остаток вклада: "+ RV+" Начислено процентов: "+(sum-popCount)+" Пополнено (или снято): "+(popCount));
-        PdfCreator.create(procents,ostatok,pop);
+        PdfCreator.create(procents,ostatok,pop, status);
     }
 
 }
