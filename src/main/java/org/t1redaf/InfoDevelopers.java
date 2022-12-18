@@ -17,12 +17,12 @@ public class InfoDevelopers extends Stage {
             setTitle("Информация о разрабах:");
             setWidth(300);
 
-            Image image = new Image("file:src/main/java/org/t1redaf/developers.png");
+            Image image = new Image("file:src/main/resources/developers.png");
             getIcons().add(image);
 
             Label moder = new Label("Модератор - Якупов Д.Р.");
             Label razrab1Label = new Label("Разработчик 1 - Абдрахманов А.Т.");
-            Label razrab2Label = new Label("Разработчик 2 - Кочетова");
+            Label razrab2Label = new Label("Разработчик 2 - Кочетова А.А.");
             Label razrab3Label = new Label("Разработчик 3 - Нуртдинов Г.Т.");
             VBox infoBox = new VBox(moder,razrab1Label,razrab2Label,razrab3Label);
             infoBox.setPadding(new Insets(10, 0, 10, 0));
