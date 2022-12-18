@@ -10,16 +10,16 @@ public class Calc {
     private double r; // процентная ставка
     private int n; // число месяцев
     private int pop; // ежемесячный взнос
-    int popCount = 0; // накопление pop
-    double sum = 0; // для вычисления процентов
+    private int popCount = 0; // накопление pop
+    private double sum = 0; // для вычисления процентов
     private String status;
 
-    public void setAll(double vznos, double procentStav, int srokvklad, int popolnenie, String replenishmentOrPayment){
-        RV = vznos;
-        r = procentStav;
-        n = srokvklad;
-        pop = popolnenie;
-        status = replenishmentOrPayment;
+    public void setAll(double RV, double r, int n, int pop, String status){
+        this.RV = RV;
+        this.r = r;
+        this.n = n;
+        this.pop = pop;
+        this.status = status;
     }
     public double getRV(){
         return RV;
