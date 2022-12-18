@@ -21,7 +21,7 @@ import java.text.NumberFormat;
 import java.util.function.UnaryOperator;
 
 public class LoanPayment extends Application {
-
+//TODO protected, super класс, перегрузка, перерождение,
     private static final Font normalFont = new Font(14);
     private static final double normalWidth = 160;
     private static final double normalSpacing = 10;
@@ -44,7 +44,7 @@ public class LoanPayment extends Application {
     public static void main(String[] args){
         Application.launch(args);
     }
-    //TODO седалть абстракный класс гетеры сетеры UML диаграмму файнал и еще еще в
+    //TODO сдеалть абстракный класс UML диаграмму файнал
     public void start(Stage primaryStage){
         primaryStage.setTitle("Депозитный калькулятор с капитализацией");
         primaryStage.setWidth(400);
@@ -68,7 +68,7 @@ public class LoanPayment extends Application {
         HBox principalBox = new HBox(principalLabel, principalTextField);
         principalBox.setSpacing(normalSpacing);
 
-        Label yearLabel = new Label("Кол-во месяцов:");
+        Label yearLabel = new Label("Кол-во месяцев:");
         yearLabel.setPrefWidth(normalWidth);
         yearLabel.setFont(normalFont);
         yearTextField = new TextField();
@@ -120,7 +120,7 @@ public class LoanPayment extends Application {
         buttonsBox.setPadding(new Insets(10,0,0,0));
         buttonsBox.setAlignment(Pos.CENTER);
 
-        //TODO Спросить у Динара что тут нах происходит
+        //TODO Спросить у Динара что тут нах происходит И че спросил?
         infoButton.setOnAction( e -> {
             primaryStage.close();
             Stage primaryStageNew = new InfoDevelopers();
