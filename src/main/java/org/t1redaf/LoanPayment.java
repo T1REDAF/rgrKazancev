@@ -124,9 +124,8 @@ public class LoanPayment extends Application {
         //TODO Спросить у Динара что тут нах происходит
         infoButton.setOnAction( e -> {
             primaryStage.close();
-            Stage primaryStageNew = new Stage();
-            InfoDevelopers infoShow = new InfoDevelopers();
-            infoShow.start(primaryStageNew);
+            Stage primaryStageNew = new InfoDevelopers();
+            primaryStageNew.show();
         });
 
         calculateButton.setOnAction( e -> {

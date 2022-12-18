@@ -11,21 +11,21 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class InfoDevelopers extends Application {
+public class InfoDevelopers extends Stage {
           private Button exitButton;
 
-          public void start(Stage primaryStage) {
-            primaryStage.setTitle("Информация о разрабах:");
-            primaryStage.setWidth(300);
+          public InfoDevelopers() {
+            setTitle("Информация о разрабах:");
+            setWidth(300);
 
             Image image = new Image("file:src/main/java/org/t1redaf/developers.png");
-            primaryStage.getIcons().add(image);
+            getIcons().add(image);
 
-            Label moder = new Label("Модератор - Якупов");
-            Label razrab1 = new Label("Разработчик1 - Абдрахманов");
-            Label razrab2 = new Label("Разработчик2 - Кочетова");
-            Label razrab3 = new Label("Разработчик3 - Нуртдинов Г.Т.");
-            VBox infoBox = new VBox(moder,razrab1,razrab2,razrab3);
+            Label moder = new Label("Модератор - Якупов Д.Р.");
+            Label razrab1Label = new Label("Разработчик 1 - Абдрахманов");
+            Label razrab2Label = new Label("Разработчик 2 - Кочетова");
+            Label razrab3Label = new Label("Разработчик 3 - Нуртдинов Г.Т.");
+            VBox infoBox = new VBox(moder,razrab1Label,razrab2Label,razrab3Label);
             infoBox.setPadding(new Insets(10, 0, 10, 0));
             infoBox.setAlignment(Pos.TOP_LEFT);
             infoBox.setSpacing(20);
@@ -40,12 +40,12 @@ public class InfoDevelopers extends Application {
             vBox2.setPadding(new Insets(10, 20, 10, 20));
 
             Scene sc = new Scene(vBox2);//Что это и все что ниже
-            primaryStage.setResizable(false);
-            primaryStage.setScene(sc);
-            primaryStage.show();
+            setResizable(false);
+            setScene(sc);
+            show();
 
             exitButton.setOnAction( e -> {
-              primaryStage.close();
+              close();
               Stage primaryStageNew = new Stage();
               LoanPayment mainShow = new LoanPayment();
               mainShow.start(primaryStageNew);
