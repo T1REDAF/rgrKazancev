@@ -1,6 +1,5 @@
 package org.t1redaf;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,7 +21,7 @@ public class InfoDevelopers extends Stage {
             getIcons().add(image);
 
             Label moder = new Label("Модератор - Якупов Д.Р.");
-            Label razrab1Label = new Label("Разработчик 1 - Абдрахманов");
+            Label razrab1Label = new Label("Разработчик 1 - Абдрахманов А.Т.");
             Label razrab2Label = new Label("Разработчик 2 - Кочетова");
             Label razrab3Label = new Label("Разработчик 3 - Нуртдинов Г.Т.");
             VBox infoBox = new VBox(moder,razrab1Label,razrab2Label,razrab3Label);

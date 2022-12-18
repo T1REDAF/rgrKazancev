@@ -23,11 +23,11 @@ public class PdfCreator {
 
             doc.open();
             //TODO доделать назуй когда в пдф выводит пополнение(сделано) еще и кривой вывод (выплаты) сука
-            doc.add(new Paragraph(String.format("%s %25s (руб) %25s (руб) %25s (руб.)","Месяц","Проценты",replenishmentOrPayment,"Остаток"), FontFactory.getFont(FONT,"CP1251",true)));
+            doc.add(new Paragraph(String.format("%s %25s (руб) %35s %25s (руб.)","Месяц","Проценты",replenishmentOrPayment,"Остаток"), FontFactory.getFont(FONT,"CP1251",true)));
             for (int i=0; i<ostatok.size(); i++) {
 
                 doc.add(new Paragraph(String.format(
-                        "%d. %32.2f %31d %50.2f",
+                        "%d. %32.2f %37d %46.2f",
                         i+1,procents.get(i),popolnenie,ostatok.get(i),FontFactory.getFont(FONT,"CP1251",true))));
             }
             doc.close();
