@@ -46,7 +46,7 @@ public class LoanPayment extends Application {
         primaryStage.setTitle("Депозитный калькулятор с капитализацией");
         primaryStage.setWidth(400);
 
-        Image image = new Image("file:src/main/java/org/t1redaf/icon.png");
+        Image image = new Image("file:src/main/resources/Images/icon.png");
         primaryStage.getIcons().add(image);
 
         infoButton = new Button("О разработчиках");
