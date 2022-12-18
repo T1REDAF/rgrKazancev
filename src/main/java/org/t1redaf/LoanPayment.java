@@ -109,9 +109,8 @@ public class LoanPayment extends Application {
         changeLabel = new Label("Пополнено/снято: ");
         VBox monthActionBox3 = new VBox(ostatokLabel,procentLabel,changeLabel);
         monthActionBox3.setSpacing(10);
-        monthActionBox3.setPadding(new Insets(0,0,0,0));
+        monthActionBox3.setPadding(new Insets(0,0,10,0));
         monthActionBox3.setAlignment(Pos.TOP_LEFT);
-
 
         calculateButton = new Button("Посчитать");
         resetButton = new Button("Сбросить");
@@ -139,7 +138,6 @@ public class LoanPayment extends Application {
         exitButton.setOnAction( e -> {
             exitCalc();
         });
-
 
         VBox vBox = new VBox(infoButtonsBox, principalBox, yearBox, interestBox, monthActionBox,buttonsBox, monthActionBox2,monthActionBox3);
         vBox.setSpacing(10);
@@ -218,6 +216,4 @@ public class LoanPayment extends Application {
         };
         tf.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, integerFilter));
     }
-
-
 }
