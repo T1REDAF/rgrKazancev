@@ -1,10 +1,13 @@
 package org.t1redaf;
 
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.text.DecimalFormat;
 import java.util.List;
 
 
