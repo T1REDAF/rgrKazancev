@@ -161,8 +161,8 @@ public class LoanPayment extends Application {
 
             if (monthActionChoiceBox.getValue().equals(monthActions[1])){
                 popolnenie = popolnenie*-1;
-                replenishmentOrPayment = "Выплаты";
-            }else {replenishmentOrPayment = "Пополнения";}
+                replenishmentOrPayment = "Выплаты (руб)   ";
+            }else {replenishmentOrPayment = "Пополнения (руб)";}
 
             Calc call = new Calc();
             call.setAll(vznos, procentStav, srokvklad,popolnenie,replenishmentOrPayment);
