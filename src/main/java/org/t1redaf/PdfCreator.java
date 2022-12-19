@@ -19,7 +19,7 @@ public class PdfCreator {
         Document doc = new Document();
 
         try {
-            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream("Payments.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream("Результат расчета.pdf"));
 
             doc.open();
             //TODO доделать назуй когда в пдф выводит пополнение(сделано) еще и кривой вывод (выплаты) сука
