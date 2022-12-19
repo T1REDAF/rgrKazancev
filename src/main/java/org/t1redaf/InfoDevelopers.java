@@ -38,7 +38,7 @@ public class InfoDevelopers extends Stage {
             vBox2.setSpacing(10);
             vBox2.setPadding(new Insets(10, 20, 10, 20));
 
-            Scene sc = new Scene(vBox2);//Что это и все что ниже
+            Scene sc = new Scene(vBox2);
             setResizable(false);
             setScene(sc);
             show();

@@ -36,7 +36,6 @@ public class LoanPayment extends Application {
     private Label procentLabel;
     private Label changeLabel;
     private Button infoButton;
-    private String replenishmentOrPayment;
 
     public static void main(String[] args){
         Application.launch(args);
@@ -118,7 +117,7 @@ public class LoanPayment extends Application {
         buttonsBox.setPadding(new Insets(10,0,0,0));
         buttonsBox.setAlignment(Pos.CENTER);
 
-        //TODO Спросить у Динара что тут нах происходит
+
         infoButton.setOnAction( e -> {
             primaryStage.close();
             Stage primaryStageNew = new InfoDevelopers();
@@ -148,7 +147,7 @@ public class LoanPayment extends Application {
         primaryStage.show();
     }
 
-    public void buttonCalc(){
+    private void buttonCalc(){
         try {
             NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
             currencyFormat.setMaximumFractionDigits(2);
@@ -156,13 +155,16 @@ public class LoanPayment extends Application {
             double vznos = Double.parseDouble(principalTextField.getText());
             double procentStav = Double.parseDouble(interestTextField.getText());
             int srokvklad = Integer.parseInt(yearTextField.getText());
+            String replenishmentOrPayment;
 
             if (monthActionChoiceBox.getValue().equals(monthActions[1])){
                 popolnenie = popolnenie*-1;
                 replenishmentOrPayment = "Выплаты (руб)   ";
-            }else {replenishmentOrPayment = "Пополнения (руб)";}
-
-            Calc call = new Calc();
+            }else {
+                replenishmentOrPayment = "Пополнения (руб)";
+            }
+            CalculatorDTO dto = new DepositDTO(vznos,procentStav,popolnenie,srokvklad,replenishmentOrPayment);
+            Calc call = new Calc(dto);
             call.setAll(vznos, procentStav, srokvklad,popolnenie,replenishmentOrPayment);
             call.ras();
             ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(call.getRV()));
@@ -187,7 +189,7 @@ public class LoanPayment extends Application {
         changeLabel.setText("Пополнено/снято: ");
     }
 
-    public void exitCalc(){
+    private void exitCalc(){
         System.exit(0);
     }
 

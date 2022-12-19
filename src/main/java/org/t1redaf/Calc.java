@@ -14,6 +14,10 @@ public class Calc {
     private double sum = 0; // для вычисления процентов
     private String status;
 
+    public Calc(CalculatorDTO dto) {
+
+    }
+
     public void setAll(double RV, double r, int n, int pop, String status){
         this.RV = RV;
         this.r = r;
@@ -21,6 +25,11 @@ public class Calc {
         this.pop = pop;
         this.status = status;
     }
+
+    public void setRV(double RV) {
+        this.RV = RV;
+    }
+
     public double getRV(){
         return RV;
     }
