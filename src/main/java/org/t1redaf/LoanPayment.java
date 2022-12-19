@@ -19,9 +19,9 @@ import java.util.function.UnaryOperator;
 
 public class LoanPayment extends Application {
 
-    private static final Font normalFont = new Font(14);
-    private static final double normalWidth = 160;
-    private static final double normalSpacing = 10;
+    private static final Font NORMAL_FONT = new Font(14);
+    private static final double NORMAL_WIDTH = 160;
+    private static final double NORMAL_SPACING = 10;
     private static final String[] monthActions = {"пополнение","выплата"};
 
     private TextField principalTextField;
@@ -56,46 +56,46 @@ public class LoanPayment extends Application {
         infoButtonsBox.setAlignment(Pos.CENTER);
 
         Label principalLabel = new Label("Первоначальный взнос:");
-        principalLabel.setPrefWidth(normalWidth);
-        principalLabel.setFont(normalFont);
+        principalLabel.setPrefWidth(NORMAL_WIDTH);
+        principalLabel.setFont(NORMAL_FONT);
         principalTextField = new TextField();
         onlyNumberTextField(principalTextField);
         principalLabel.setTextAlignment(TextAlignment.RIGHT);
         principalTextField.setPrefColumnCount(10);
         principalTextField.setPromptText("Principal");
         HBox principalBox = new HBox(principalLabel, principalTextField);
-        principalBox.setSpacing(normalSpacing);
+        principalBox.setSpacing(NORMAL_SPACING);
 
         Label yearLabel = new Label("Кол-во месяцов:");
-        yearLabel.setPrefWidth(normalWidth);
-        yearLabel.setFont(normalFont);
+        yearLabel.setPrefWidth(NORMAL_WIDTH);
+        yearLabel.setFont(NORMAL_FONT);
         yearTextField = new TextField();
         onlyNumberTextField(yearTextField);
         yearTextField.setPrefColumnCount(10);
         yearTextField.setPromptText("Month");
         HBox yearBox = new HBox(yearLabel, yearTextField);
-        yearBox.setSpacing(normalSpacing);
+        yearBox.setSpacing(NORMAL_SPACING);
 
         Label interestLabel = new Label("Процентная ставка:");
-        interestLabel.setPrefWidth(normalWidth);
-        interestLabel.setFont(normalFont);
+        interestLabel.setPrefWidth(NORMAL_WIDTH);
+        interestLabel.setFont(NORMAL_FONT);
         interestTextField = new TextField();
         onlyNumberTextField(interestTextField);
         interestTextField.setPrefColumnCount(10);
         interestTextField.setPromptText("Interest Rate");
         HBox interestBox = new HBox(interestLabel, interestTextField);
-        interestBox.setSpacing(normalSpacing);
+        interestBox.setSpacing(NORMAL_SPACING);
 
         Label monthActionLabel = new Label("Ежемесячно:");
         monthActionLabel.setPrefWidth(100);
-        monthActionLabel.setFont(normalFont);
+        monthActionLabel.setFont(NORMAL_FONT);
         monthActionTextField = new TextField();
         onlyNumberWithZeroTextField(monthActionTextField);
         monthActionTextField.setPrefColumnCount(4);
         monthActionChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList(monthActions));
         monthActionChoiceBox.setValue(monthActions[0]);
         HBox monthActionBox = new HBox(monthActionLabel, monthActionTextField, monthActionChoiceBox);
-        monthActionBox.setSpacing(normalSpacing);
+        monthActionBox.setSpacing(NORMAL_SPACING);
 
         Label calculationResultsLabel = new Label("Результаты расчета: ");
         HBox monthActionBox2 = new HBox(calculationResultsLabel);
