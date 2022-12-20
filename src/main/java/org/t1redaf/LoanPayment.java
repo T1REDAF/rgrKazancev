@@ -13,18 +13,23 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
-
 import java.text.NumberFormat;
 import java.util.function.UnaryOperator;
 
 public class LoanPayment extends Application {
 
-    private static final Font NORMAL_FONT = new Font(14);
+    private static final Font NORMAL_FONT = new Font(14);// поля-константы
     private static final double NORMAL_WIDTH = 160;
     private static final double NORMAL_SPACING = 10;
     private static final String[] monthActions = {"пополнение","выплата"};
 
-    private TextField principalTextField;
+    private static Label principalLabel;// 8г ь
+    private static Label yearLabel;
+    private static Label interestLabel;
+    private static Label monthActionLabel;
+    private static Label calculationResultsLabel;
+
+    private TextField principalTextField;//приватные поля
     private TextField yearTextField;
     private TextField interestTextField;
     private TextField monthActionTextField;
@@ -54,7 +59,7 @@ public class LoanPayment extends Application {
         infoButtonsBox.setPadding(new Insets(10,0,10,0));
         infoButtonsBox.setAlignment(Pos.CENTER);
 
-        Label principalLabel = new Label("Первоначальный взнос:");
+        principalLabel = new Label("Первоначальный взнос:");
         principalLabel.setPrefWidth(NORMAL_WIDTH);
         principalLabel.setFont(NORMAL_FONT);
         principalTextField = new TextField();
@@ -65,7 +70,7 @@ public class LoanPayment extends Application {
         HBox principalBox = new HBox(principalLabel, principalTextField);
         principalBox.setSpacing(NORMAL_SPACING);
 
-        Label yearLabel = new Label("Кол-во месяцов:");
+        yearLabel = new Label("Кол-во месяцов:");
         yearLabel.setPrefWidth(NORMAL_WIDTH);
         yearLabel.setFont(NORMAL_FONT);
         yearTextField = new TextField();
@@ -75,7 +80,7 @@ public class LoanPayment extends Application {
         HBox yearBox = new HBox(yearLabel, yearTextField);
         yearBox.setSpacing(NORMAL_SPACING);
 
-        Label interestLabel = new Label("Процентная ставка:");
+        interestLabel = new Label("Процентная ставка:");
         interestLabel.setPrefWidth(NORMAL_WIDTH);
         interestLabel.setFont(NORMAL_FONT);
         interestTextField = new TextField();
@@ -85,7 +90,7 @@ public class LoanPayment extends Application {
         HBox interestBox = new HBox(interestLabel, interestTextField);
         interestBox.setSpacing(NORMAL_SPACING);
 
-        Label monthActionLabel = new Label("Ежемесячно:");
+        monthActionLabel = new Label("Ежемесячно:");
         monthActionLabel.setPrefWidth(100);
         monthActionLabel.setFont(NORMAL_FONT);
         monthActionTextField = new TextField();
@@ -96,7 +101,7 @@ public class LoanPayment extends Application {
         HBox monthActionBox = new HBox(monthActionLabel, monthActionTextField, monthActionChoiceBox);
         monthActionBox.setSpacing(NORMAL_SPACING);
 
-        Label calculationResultsLabel = new Label("Результаты расчета: ");
+        calculationResultsLabel = new Label("Результаты расчета: ");
         HBox monthActionBox2 = new HBox(calculationResultsLabel);
         monthActionBox2.setPadding(new Insets(10,0,0,0));
         monthActionBox2.setAlignment(Pos.CENTER);
