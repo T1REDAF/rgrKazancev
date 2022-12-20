@@ -1,6 +1,6 @@
 package org.t1redaf;
 
-public final class DepositDTO extends CalculatorDTO{
+public final class DepositDTO extends CalculatorDTO {
 
     private int popolnenie;
     private int srokvklad;

@@ -21,15 +21,6 @@ public class Calc {
         this.pop = dto.getPopolnenie();
         this.status = dto.getReplenishmentOrPayment();
     }
-
-//    public void setAll(double RV, double r, int n, int pop, String status){
-//        this.RV = RV;
-//        this.r = r;
-//        this.n = n;
-//        this.pop = pop;
-//        this.status = status;
-//    }
-
     public void setRV(double RV) {
         this.RV = RV;
     }
@@ -37,12 +28,15 @@ public class Calc {
     public double getRV(){
         return RV;
     }
+
     public double getProc(){
         return sum-popCount;
     }
+
     public int getPop(){
         return popCount;
     }
+
     public void ras(){
         r/=100;
         double month = 1 + (r / 12);//процентная ставка
