@@ -7,7 +7,7 @@ public abstract class CalculatorDTO {
     public CalculatorDTO() {
     }
 
-    public CalculatorDTO(double vznos, double procentStav) {
+    protected CalculatorDTO(double vznos, double procentStav) {
         this.vznos = vznos;
         this.procentStav = procentStav;
     }
