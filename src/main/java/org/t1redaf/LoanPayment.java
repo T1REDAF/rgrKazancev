@@ -163,9 +163,9 @@ public class LoanPayment extends Application {
             }else {
                 replenishmentOrPayment = "Пополнения (руб)";
             }
-            CalculatorDTO dto = new DepositDTO(vznos,procentStav,popolnenie,srokvklad,replenishmentOrPayment);
+            DepositDTO dto = new DepositDTO(vznos,procentStav,popolnenie,srokvklad,replenishmentOrPayment);
             Calc call = new Calc(dto);
-            call.setAll(vznos, procentStav, srokvklad,popolnenie,replenishmentOrPayment);
+            //call.setAll(vznos, procentStav, srokvklad,popolnenie,replenishmentOrPayment);
             call.ras();
             ostatokLabel.setText("Остаток вклада: "+ currencyFormat.format(call.getRV()));
             procentLabel.setText("Начислено процентов: "+ currencyFormat.format(call.getProc()));

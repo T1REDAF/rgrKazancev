@@ -14,17 +14,21 @@ public class Calc {
     private double sum = 0; // для вычисления процентов
     private String status;
 
-    public Calc(CalculatorDTO dto) {
-
+    public Calc(DepositDTO dto) {
+        this.RV = dto.getVznos();
+        this.r = dto.getProcentStav();
+        this.n = dto.getSrokvklad();
+        this.pop = dto.getPopolnenie();
+        this.status = dto.getReplenishmentOrPayment();
     }
 
-    public void setAll(double RV, double r, int n, int pop, String status){
-        this.RV = RV;
-        this.r = r;
-        this.n = n;
-        this.pop = pop;
-        this.status = status;
-    }
+//    public void setAll(double RV, double r, int n, int pop, String status){
+//        this.RV = RV;
+//        this.r = r;
+//        this.n = n;
+//        this.pop = pop;
+//        this.status = status;
+//    }
 
     public void setRV(double RV) {
         this.RV = RV;
