@@ -13,6 +13,7 @@ public class Calc {
     private int popCount = 0; // накопление pop
     private double sum = 0; // для вычисления процентов
     private String status;
+    private DepositDTO dto;
 
     public Calc(DepositDTO dto) {
         this.RV = dto.getVznos();
@@ -20,6 +21,7 @@ public class Calc {
         this.n = dto.getSrokvklad();
         this.pop = dto.getPopolnenie();
         this.status = dto.getReplenishmentOrPayment();
+        this.dto = dto;
     }
     public void setRV(double RV) {
         this.RV = RV;
@@ -51,7 +53,7 @@ public class Calc {
             ostatok.add(RV);
         }
         //"Остаток вклада: "+ RV+" Начислено процентов: "+(sum-popCount)+" Пополнено (или снято): "+(popCount));
-        PdfCreator.create(procents,ostatok,pop, status);
+        PdfCreator.create(procents,ostatok,pop, status,dto);
     }
 
 }

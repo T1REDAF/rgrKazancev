@@ -6,6 +6,12 @@ public final class DepositDTO extends CalculatorDTO {
     private int srokvklad;
     private String replenishmentOrPayment;
 
+    @Override
+    public String toString() {
+        return super.toString() + "\nЕжемесячно = " + popolnenie +
+                "\nСрок вклада = " + srokvklad ;
+    }
+
     public DepositDTO() {
         super();
     }

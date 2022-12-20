@@ -15,14 +15,14 @@ public class PdfCreator {
 
     public static final String FONT = "C:\\\\WINDOWS\\Fonts\\\\ARIAL.TTF";
 
-    public static void create(List<Double> procents, List<Double> ostatok,int popolnenie, String replenishmentOrPayment) {
+    public static void create(List<Double> procents, List<Double> ostatok,int popolnenie, String replenishmentOrPayment,DepositDTO deposit) {
         Document doc = new Document();
 
         try {
             PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream("Результат расчета.pdf"));
 
             doc.open();
-            //TODO доделать назуй когда в пдф выводит пополнение(сделано) еще и кривой вывод (выплаты) сука
+            doc.add(new Paragraph(deposit.toString(), FontFactory.getFont(FONT,"CP1251",true)));
             doc.add(new Paragraph(String.format("%s %25s (руб) %35s %25s (руб.)","Месяц","Проценты",replenishmentOrPayment,"Остаток"), FontFactory.getFont(FONT,"CP1251",true)));
             for (int i=0; i<ostatok.size(); i++) {
 

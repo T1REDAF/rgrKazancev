@@ -40,7 +40,7 @@ public class LoanPayment extends Application {
     public static void main(String[] args){
         Application.launch(args);
     }
-    //TODO картинки в Images final class, модификаторы доступа protected, Суперклассы и подклассы. Переопределение и перегрузка., Обработка примитивных типов как объектных (обертки), Отношения между классами (UML)Файл, Создание объектов с помощью конструкторов.Файл, разобраться с лямба выражениями
+    //TODO  Суперклассы и подклассы. Переопределение и перегрузка, разобраться с лямба выражениями
     //todo выводить в пдф информация с формы
     public void start(Stage primaryStage){
         primaryStage.setTitle("Депозитный калькулятор с капитализацией");
