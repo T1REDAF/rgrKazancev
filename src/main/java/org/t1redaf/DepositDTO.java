@@ -8,8 +8,8 @@ public final class DepositDTO extends CalculatorDTO {
 
     @Override
     public String toString() {
-        return super.toString() + "\nЕжемесячно = " + popolnenie +
-                "\nСрок вклада = " + srokvklad ;
+        return super.toString() + "\nЕжемесячно = " + popolnenie+ " руб." +
+                "\nСрок вклада = " + srokvklad + " месяцев\n\n" ;
     }
 
     public DepositDTO() {

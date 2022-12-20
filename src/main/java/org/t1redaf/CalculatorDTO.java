@@ -9,8 +9,8 @@ public abstract class CalculatorDTO {
 
     @Override
     public String toString() {
-        return "Первоначальный взнос = " + vznos +
-                "\nПроцентная ставка = " + procentStav;
+        return "Первоначальный взнос = " + vznos + " руб." +
+                "\nПроцентная ставка = " + procentStav + " руб.";
     }
 
     protected CalculatorDTO(double vznos, double procentStav) {
