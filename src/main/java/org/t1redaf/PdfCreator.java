@@ -15,7 +15,7 @@ public class PdfCreator {
 
     public static final String FONT = "C:\\\\WINDOWS\\Fonts\\\\ARIAL.TTF";
 
-    public static void create(List<Double> procents, List<Double> ostatok,int popolnenie, String replenishmentOrPayment) {
+    public static void create(List<Double> procents, List<Double> ostatok,int popolnenie, String replenishmentOrPayment) {//статический метод
         Document doc = new Document();
 
         try {
