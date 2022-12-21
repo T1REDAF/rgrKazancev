@@ -23,7 +23,7 @@ public class LoanPayment extends Application {
     private static final double NORMAL_SPACING = 10;
     private static final String[] monthActions = {"пополнение","выплата"};
 
-    private static Label principalLabel;// 8г ь
+    private static Label principalLabel;//
     private static Label yearLabel;
     private static Label interestLabel;
     private static Label monthActionLabel;
