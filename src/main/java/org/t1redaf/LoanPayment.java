@@ -41,6 +41,7 @@ public class LoanPayment extends Application {
     private Label procentLabel;
     private Label changeLabel;
     private Button infoButton;
+    private Button generationPdf;
 
     public static void main(String[] args){
         Application.launch(args);
@@ -55,8 +56,10 @@ public class LoanPayment extends Application {
         primaryStage.getIcons().add(image);
 
         infoButton = new Button("О разработчиках");
-        HBox infoButtonsBox = new HBox(infoButton);
-        infoButtonsBox.setPadding(new Insets(10,0,10,0));
+        generationPdf = new Button("Генерация PDF");
+        HBox infoButtonsBox = new HBox(generationPdf,infoButton);
+        infoButtonsBox.setPadding(new Insets(5,0,10,0));
+        infoButtonsBox.setSpacing(20);
         infoButtonsBox.setAlignment(Pos.CENTER);
 
         principalLabel = new Label("Первоначальный взнос:");
@@ -133,6 +136,10 @@ public class LoanPayment extends Application {
             buttonCalc();
         });
 
+        generationPdf.setOnAction( e -> {
+            buttonGenerPDF();
+        });
+
         resetButton.setOnAction( e -> {
             resetCalc();
         });
@@ -141,7 +148,7 @@ public class LoanPayment extends Application {
             exitCalc();
         });
 
-        VBox vBox = new VBox(infoButtonsBox, principalBox, yearBox, interestBox, monthActionBox,buttonsBox, monthActionBox2,monthActionBox3);
+        VBox vBox = new VBox(principalBox, yearBox, interestBox, monthActionBox,buttonsBox, monthActionBox2,monthActionBox3, infoButtonsBox);
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(10, 20, 10, 20));
 
@@ -182,6 +189,28 @@ public class LoanPayment extends Application {
             }else {
                 changeLabel.setText("Пополнено: "+  currencyFormat.format(call.getPop()));
             }
+        }catch(NumberFormatException e){}
+    }
+
+    private void buttonGenerPDF(){
+        try {
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(); //Change amount to currency format
+            currencyFormat.setMaximumFractionDigits(2);
+            int popolnenie = Integer.parseInt(monthActionTextField.getText());
+            double vznos = Double.parseDouble(principalTextField.getText());
+            double procentStav = Double.parseDouble(interestTextField.getText());
+            int srokvklad = Integer.parseInt(yearTextField.getText());
+            String replenishmentOrPayment;
+
+            if (monthActionChoiceBox.getValue().equals(monthActions[1])){
+                popolnenie = popolnenie*-1;
+                replenishmentOrPayment = "Выплаты (руб)   ";
+            }else {
+                replenishmentOrPayment = "Пополнения (руб)";
+            }
+            DepositDTO dto = new DepositDTO(vznos,procentStav,popolnenie,srokvklad,replenishmentOrPayment);
+            Calc call = new Calc(dto);
+            call.generationPdf();
         }catch(NumberFormatException e){}
     }
     public void resetCalc(){

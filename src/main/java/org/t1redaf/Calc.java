@@ -23,6 +23,9 @@ public class Calc {
         this.status = dto.getReplenishmentOrPayment();
         this.dto = dto;
     }
+
+    public Calc() {
+    }
     public void setRV(double RV) {
         this.RV = RV;
     }
@@ -52,8 +55,10 @@ public class Calc {
             procents.add(RV-bac-pop);
             ostatok.add(RV);
         }
-        //"Остаток вклада: "+ RV+" Начислено процентов: "+(sum-popCount)+" Пополнено (или снято): "+(popCount));
+        //"Остаток вклада: "+ RV+" Начислено процентов: "+(sum-popCount)+" Пополнено (или снято): "+(popCount))
+    }
+    public void generationPdf() {
+        ras();
         PdfCreator.create(procents,ostatok,pop, status,dto);
     }
-
 }
