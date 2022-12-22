@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PdfCreator {
     private static BufferedImage image;
-    private static Image image3 = null;
+    private static Image image3;
     public static final Font FONT = FontFactory.getFont("/Fonts/times.ttf","CP1251",true);//шрифт
 
     public static void create(List<Double> procents, List<Double> ostatok,int popolnenie, String replenishmentOrPayment,String startLine) {//статический метод
