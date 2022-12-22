@@ -15,8 +15,7 @@ import java.util.List;
 public class PdfCreator {
     private static BufferedImage image;
     private static Image image3 = null;
-    //TODO бан за полный путь
-    public static final Font FONT = FontFactory.getFont("C:\\\\WINDOWS\\Fonts\\\\ARIAL.TTF","CP1251",true);//шрифт
+    public static final Font FONT = FontFactory.getFont("/Fonts/times.ttf","CP1251",true);//шрифт
 
     public static void create(List<Double> procents, List<Double> ostatok,int popolnenie, String replenishmentOrPayment,DepositDTO depositDTO) {//статический метод
         String[] tableHeads = {"Месяц","Проценты (руб)",replenishmentOrPayment,"Остаток (руб)"};//шапка пдф документа
