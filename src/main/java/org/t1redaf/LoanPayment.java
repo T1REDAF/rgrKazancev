@@ -13,8 +13,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+
+import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.function.UnaryOperator;
+import java.awt.image.BufferedImage;
 
 public class LoanPayment extends Application {
 
@@ -42,18 +49,30 @@ public class LoanPayment extends Application {
     private Label changeLabel;
     private Button infoButton;
     private Button generationPdf;
+    private BufferedImage image;
 
     public static void main(String[] args){
         Application.launch(args);
     }
     //TODO  Суперклассы и подклассы. Переопределение и перегрузка, разобраться с лямба выражениями
     //todo выводить в пдф информация с формы
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Депозитный калькулятор с капитализацией");
         primaryStage.setWidth(400);
 
-        Image image = new Image("file:src/main/resources/Images/icon.png");
-        primaryStage.getIcons().add(image);
+        //Image image = new Image("file:src/main/resources/Images/icon.png");
+        try {
+            image = ImageIO.read(Image.class.getClassLoader().getResource("icon.png"));
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", bos );
+            byte [] data = bos.toByteArray();
+            ByteArrayInputStream bis = new ByteArrayInputStream(data);
+            BufferedImage bImage2 = ImageIO.read(bis);
+            ImageIO.write(bImage2, "jpg", new File("output.jpg") );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //primaryStage.getIcons().add(bImage2);
 
         infoButton = new Button("О разработчиках");
         generationPdf = new Button("Генерация PDF");

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+
 public class PdfCreator {
     //TODO бан за полный путь
     public static final Font FONT = FontFactory.getFont("C:\\\\WINDOWS\\Fonts\\\\ARIAL.TTF","CP1251",true);//шрифт
