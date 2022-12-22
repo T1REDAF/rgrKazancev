@@ -60,6 +60,6 @@ public class Calc {
     }
     public void generationPdf() {
         ras();
-        PdfCreator.create(procents,ostatok,pop, status,dto);
+        PdfCreator.create(procents,ostatok,pop, status,dto.toString());
     }
 }

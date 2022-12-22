@@ -17,7 +17,7 @@ public class PdfCreator {
     private static Image image3 = null;
     public static final Font FONT = FontFactory.getFont("/Fonts/times.ttf","CP1251",true);//шрифт
 
-    public static void create(List<Double> procents, List<Double> ostatok,int popolnenie, String replenishmentOrPayment,DepositDTO depositDTO) {//статический метод
+    public static void create(List<Double> procents, List<Double> ostatok,int popolnenie, String replenishmentOrPayment,String startLine) {//статический метод
         String[] tableHeads = {"Месяц","Проценты (руб)",replenishmentOrPayment,"Остаток (руб)"};//шапка пдф документа
         Document doc = new Document();//иницализируем документ
 
@@ -43,7 +43,7 @@ public class PdfCreator {
             firstLine.setAlignment(Element.ALIGN_CENTER);
             doc.add(firstLine);
 
-            doc.add(new Paragraph(depositDTO.toString(), FONT));
+            doc.add(new Paragraph(startLine, FONT));
             PdfPTable table = new PdfPTable(4);
 
             image3.setAbsolutePosition(475, 725);
@@ -56,7 +56,7 @@ public class PdfCreator {
             for (int i = 0; i < procents.size(); i++) {
                 table.addCell(Integer.toString(i+1));
                 table.addCell(String.format("%.2f", procents.get(i)));
-                table.addCell(Integer.toString(depositDTO.getPopolnenie()));
+                table.addCell(Integer.toString(popolnenie));
                 table.addCell(String.format("%.2f",ostatok.get(i)));
             }
             doc.add(table);
