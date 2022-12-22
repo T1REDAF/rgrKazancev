@@ -1,24 +1,35 @@
 package org.t1redaf;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.awt.image.BufferedImage;
+
 public class InfoDevelopers extends Stage {
           private Button exitButton;
+          private BufferedImage image;
 
           public InfoDevelopers() {
             setTitle("Информация о разрабах:");
             setWidth(300);
 
-            Image image = new Image("file:src/main/resources/Images/developers.png");
-            getIcons().add(image);
+            try{
+              image =  ImageIO.read(getClass().getResource("/Images/developers.png"));
+              WritableImage image2 = SwingFXUtils.toFXImage(image, null);
+              getIcons().add(image2);
+            }catch (IOException e) {
+              throw new RuntimeException(e);
+            }
 
             Label moder = new Label("Модератор - Якупов Д.Р.");
             Label razrab1Label = new Label("Разработчик 1 - Абдрахманов А.Т.");

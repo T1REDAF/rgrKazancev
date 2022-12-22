@@ -2,11 +2,15 @@ package org.t1redaf;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -15,9 +19,6 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import javax.imageio.ImageIO;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.function.UnaryOperator;
@@ -60,19 +61,13 @@ public class LoanPayment extends Application {
         primaryStage.setTitle("Депозитный калькулятор с капитализацией");
         primaryStage.setWidth(400);
 
-        //Image image = new Image("file:src/main/resources/Images/icon.png");
-        try {
-            image = ImageIO.read(Image.class.getClassLoader().getResource("icon.png"));
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", bos );
-            byte [] data = bos.toByteArray();
-            ByteArrayInputStream bis = new ByteArrayInputStream(data);
-            BufferedImage bImage2 = ImageIO.read(bis);
-            ImageIO.write(bImage2, "jpg", new File("output.jpg") );
-        } catch (IOException e) {
+        try{
+            image =  ImageIO.read(getClass().getResource("/Images/icon.png"));
+            WritableImage image2 = SwingFXUtils.toFXImage(image, null);
+            primaryStage.getIcons().add(image2);
+        }catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //primaryStage.getIcons().add(bImage2);
 
         infoButton = new Button("О разработчиках");
         generationPdf = new Button("Генерация PDF");
