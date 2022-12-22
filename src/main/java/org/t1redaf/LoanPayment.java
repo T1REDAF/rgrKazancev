@@ -87,7 +87,7 @@ public class LoanPayment extends Application {
         HBox principalBox = new HBox(principalLabel, principalTextField);
         principalBox.setSpacing(NORMAL_SPACING);
 
-        yearLabel = new Label("Кол-во месяцов:");
+        yearLabel = new Label("Кол-во месяцев:");
         yearLabel.setPrefWidth(NORMAL_WIDTH);
         yearLabel.setFont(NORMAL_FONT);
         yearTextField = new TextField();
