@@ -14,17 +14,16 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class InfoDevelopers extends Stage {
-          private Button exitButton;
-          private BufferedImage image;
 
-          public InfoDevelopers() {
+  public InfoDevelopers() {
             setTitle("Информация о разрабах:");
             setWidth(300);
 
             try{
-              image =  ImageIO.read(getClass().getResource("/Images/developers.png"));
+              BufferedImage image = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Images/developers.png")));
               WritableImage image2 = SwingFXUtils.toFXImage(image, null);
               getIcons().add(image2);
             }catch (IOException e) {
@@ -40,7 +39,7 @@ public class InfoDevelopers extends Stage {
             infoBox.setAlignment(Pos.TOP_LEFT);
             infoBox.setSpacing(20);
 
-            exitButton = new Button("Назад");
+            Button exitButton = new Button("Назад");
             HBox exitButtonsBox = new HBox(exitButton);
             exitButtonsBox.setPadding(new Insets(10, 0, 0, 0));
             exitButtonsBox.setAlignment(Pos.CENTER);
@@ -54,7 +53,7 @@ public class InfoDevelopers extends Stage {
             setScene(sc);
             show();
 
-            exitButton.setOnAction( e -> {
+            exitButton.setOnAction(e -> {
               close();
               Stage primaryStageNew = new Stage();
               LoanPayment mainShow = new LoanPayment();

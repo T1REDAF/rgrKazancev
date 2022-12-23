@@ -6,15 +6,15 @@ import java.util.List;
 
 public class Calc {
     private double RV; // остаток вклада
-    private List<Double> procents = new ArrayList<>();
-    private List<Double> ostatok = new ArrayList<>();
+    private final List<Double> procents = new ArrayList<>();
+    private final List<Double> ostatok = new ArrayList<>();
     private double r; // процентная ставка
-    private int n; // число месяцев
-    private int pop; // ежемесячный взнос
+    private final int n; // число месяцев
+    private final int pop; // ежемесячный взнос
     private int popCount = 0; // накопление pop
     private double sum = 0; // для вычисления процентов
-    private String status;
-    private DepositDTO dto;
+    private final String status;
+    private final DepositDTO dto;
 
     public Calc(DepositDTO dto) {
         this.RV = dto.getVznos();
@@ -23,12 +23,6 @@ public class Calc {
         this.pop = dto.getPopolnenie();
         this.status = dto.getReplenishmentOrPayment();
         this.dto = dto;
-    }
-
-    public Calc() {
-    }
-    public void setRV(double RV) {
-        this.RV = RV;
     }
 
     public double getRV(){

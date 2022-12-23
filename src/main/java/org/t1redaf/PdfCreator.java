@@ -10,27 +10,25 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 
 public class PdfCreator {
-    private static BufferedImage image;
-    private static Image image3;
     public static final Font FONT = FontFactory.getFont("/Fonts/times.ttf","CP1251",true);//шрифт
 
     public static void create(List<Double> procents, List<Double> ostatok,int popolnenie, String replenishmentOrPayment,String startLine) {//статический метод
         String[] tableHeads = {"Месяц","Проценты (руб)",replenishmentOrPayment,"Остаток (руб)"};//шапка пдф документа
         Document doc = new Document();//иницализируем документ
 
+        Image image3;
         try {
-            image =  ImageIO.read(PdfCreator.class.getResource("/Images/money.png"));
+            BufferedImage image = ImageIO.read(Objects.requireNonNull(PdfCreator.class.getResource("/Images/money.png")));
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(image, "png", baos);
             Image iTextImage = Image.getInstance(baos.toByteArray());
             //WritableImage image2 = SwingFXUtils.toFXImage(image, null);
             image3 = Image.getInstance(iTextImage);
-        } catch (BadElementException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (BadElementException | IOException e) {
             throw new RuntimeException(e);
         }
         image3.scaleAbsolute(100f, 100f); //image width,height

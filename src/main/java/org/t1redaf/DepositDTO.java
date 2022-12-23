@@ -2,18 +2,14 @@ package org.t1redaf;
 
 public final class DepositDTO extends CalculatorDTO {
 
-    private int popolnenie;
-    private int srokvklad;
-    private String replenishmentOrPayment;
+    private final int popolnenie;
+    private final int srokvklad;
+    private final String replenishmentOrPayment;
 
     @Override
     public String toString() {
         return super.toString() + "\nЕжемесячно = " + popolnenie+ " руб." +
                 "\nСрок вклада = " + srokvklad + " месяцев\n\n" ;
-    }
-
-    public DepositDTO() {
-        super();
     }
 
     public DepositDTO(double vznos, double procentStav, int popolnenie, int srokvklad, String replenishmentOrPayment) {
@@ -27,23 +23,12 @@ public final class DepositDTO extends CalculatorDTO {
         return popolnenie;
     }
 
-    public void setPopolnenie(int popolnenie) {
-        this.popolnenie = popolnenie;
-    }
-
     public int getSrokvklad() {
         return srokvklad;
-    }
-
-    public void setSrokvklad(int srokvklad) {
-        this.srokvklad = srokvklad;
     }
 
     public String getReplenishmentOrPayment() {
         return replenishmentOrPayment;
     }
 
-    public void setReplenishmentOrPayment(String replenishmentOrPayment) {
-        this.replenishmentOrPayment = replenishmentOrPayment;
-    }
 }

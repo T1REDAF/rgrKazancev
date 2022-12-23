@@ -1,11 +1,8 @@
 package org.t1redaf;
 
 public abstract class CalculatorDTO {
-    private double vznos;
-    private double procentStav;
-
-    public CalculatorDTO() {
-    }
+    private final double vznos;
+    private final double procentStav;
 
     @Override
     public String toString() {
@@ -22,15 +19,8 @@ public abstract class CalculatorDTO {
         return vznos;
     }
 
-    public void setVznos(double vznos) {
-        this.vznos = vznos;
-    }
-
     public double getProcentStav() {
         return procentStav;
     }
 
-    public void setProcentStav(double procentStav) {
-        this.procentStav = procentStav;
-    }
 }

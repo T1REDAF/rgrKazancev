@@ -21,6 +21,7 @@ import javafx.util.converter.IntegerStringConverter;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 import java.awt.image.BufferedImage;
 
@@ -31,29 +32,17 @@ public class LoanPayment extends Application {
     private static final double NORMAL_SPACING = 10;
     private static final String[] monthActions = {"пополнение","выплата"};
 
-    private static Label principalLabel;//
-    private static Label yearLabel;
-    private static Label interestLabel;
-    private static Label monthActionLabel;
-    private static Label calculationResultsLabel;
-
     private TextField principalTextField;//приватные поля
     private TextField yearTextField;
     private TextField interestTextField;
     private TextField monthActionTextField;
     private ChoiceBox<String> monthActionChoiceBox;
-    private Button calculateButton;
-    private Button resetButton;
-    private Button exitButton;
     private Label ostatokLabel;
     private Label procentLabel;
     private Label changeLabel;
-    private Button infoButton;
-    private Button generationPdf;
-    private BufferedImage image;
 
-    public static void main(String[] args){
-        Application.launch(args);
+    public void launcher(){
+        Application.launch();
     }
     //TODO  Суперклассы и подклассы. Переопределение и перегрузка, разобраться с лямба выражениями
     //todo выводить в пдф информация с формы
@@ -62,21 +51,22 @@ public class LoanPayment extends Application {
         primaryStage.setWidth(400);
 
         try{
-            image =  ImageIO.read(getClass().getResource("/Images/icon.png"));
+            BufferedImage image = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Images/icon.png")));
             WritableImage image2 = SwingFXUtils.toFXImage(image, null);
             primaryStage.getIcons().add(image2);
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        infoButton = new Button("О разработчиках");
-        generationPdf = new Button("Генерация PDF");
-        HBox infoButtonsBox = new HBox(generationPdf,infoButton);
+        Button infoButton = new Button("О разработчиках");
+        Button generationPdf = new Button("Генерация PDF");
+        HBox infoButtonsBox = new HBox(generationPdf, infoButton);
         infoButtonsBox.setPadding(new Insets(5,0,10,0));
         infoButtonsBox.setSpacing(20);
         infoButtonsBox.setAlignment(Pos.CENTER);
 
-        principalLabel = new Label("Первоначальный взнос:");
+        //
+        Label principalLabel = new Label("Первоначальный взнос:");
         principalLabel.setPrefWidth(NORMAL_WIDTH);
         principalLabel.setFont(NORMAL_FONT);
         principalTextField = new TextField();
@@ -87,7 +77,7 @@ public class LoanPayment extends Application {
         HBox principalBox = new HBox(principalLabel, principalTextField);
         principalBox.setSpacing(NORMAL_SPACING);
 
-        yearLabel = new Label("Кол-во месяцев:");
+        Label yearLabel = new Label("Кол-во месяцев:");
         yearLabel.setPrefWidth(NORMAL_WIDTH);
         yearLabel.setFont(NORMAL_FONT);
         yearTextField = new TextField();
@@ -97,7 +87,7 @@ public class LoanPayment extends Application {
         HBox yearBox = new HBox(yearLabel, yearTextField);
         yearBox.setSpacing(NORMAL_SPACING);
 
-        interestLabel = new Label("Процентная ставка:");
+        Label interestLabel = new Label("Процентная ставка:");
         interestLabel.setPrefWidth(NORMAL_WIDTH);
         interestLabel.setFont(NORMAL_FONT);
         interestTextField = new TextField();
@@ -107,7 +97,7 @@ public class LoanPayment extends Application {
         HBox interestBox = new HBox(interestLabel, interestTextField);
         interestBox.setSpacing(NORMAL_SPACING);
 
-        monthActionLabel = new Label("Ежемесячно:");
+        Label monthActionLabel = new Label("Ежемесячно:");
         monthActionLabel.setPrefWidth(100);
         monthActionLabel.setFont(NORMAL_FONT);
         monthActionTextField = new TextField();
@@ -118,7 +108,7 @@ public class LoanPayment extends Application {
         HBox monthActionBox = new HBox(monthActionLabel, monthActionTextField, monthActionChoiceBox);
         monthActionBox.setSpacing(NORMAL_SPACING);
 
-        calculationResultsLabel = new Label("Результаты расчета: ");
+        Label calculationResultsLabel = new Label("Результаты расчета: ");
         HBox monthActionBox2 = new HBox(calculationResultsLabel);
         monthActionBox2.setPadding(new Insets(10,0,0,0));
         monthActionBox2.setAlignment(Pos.CENTER);
@@ -131,36 +121,28 @@ public class LoanPayment extends Application {
         monthActionBox3.setPadding(new Insets(0,0,10,0));
         monthActionBox3.setAlignment(Pos.TOP_LEFT);
 
-        calculateButton = new Button("Посчитать");
-        resetButton = new Button("Сбросить");
-        exitButton = new Button("Выход");
-        HBox buttonsBox = new HBox(calculateButton,resetButton, exitButton);
+        Button calculateButton = new Button("Посчитать");
+        Button resetButton = new Button("Сбросить");
+        Button exitButton = new Button("Выход");
+        HBox buttonsBox = new HBox(calculateButton, resetButton, exitButton);
         buttonsBox.setSpacing(30);
         buttonsBox.setPadding(new Insets(10,0,0,0));
         buttonsBox.setAlignment(Pos.CENTER);
 
 
-        infoButton.setOnAction( e -> {
+        infoButton.setOnAction(e -> {
             primaryStage.close();
             Stage primaryStageNew = new InfoDevelopers();
             primaryStageNew.show();
         });
 
-        calculateButton.setOnAction( e -> {
-            buttonCalc();
-        });
+        calculateButton.setOnAction(e -> buttonCalc());
 
-        generationPdf.setOnAction( e -> {
-            buttonGenerPDF();
-        });
+        generationPdf.setOnAction(e -> buttonGenerPDF());
 
-        resetButton.setOnAction( e -> {
-            resetCalc();
-        });
+        resetButton.setOnAction(e -> resetCalc());
 
-        exitButton.setOnAction( e -> {
-            exitCalc();
-        });
+        exitButton.setOnAction(e -> exitCalc());
 
         VBox vBox = new VBox(principalBox, yearBox, interestBox, monthActionBox,buttonsBox, monthActionBox2,monthActionBox3, infoButtonsBox);
         vBox.setSpacing(10);
@@ -203,7 +185,7 @@ public class LoanPayment extends Application {
             }else {
                 changeLabel.setText("Пополнено: "+  currencyFormat.format(call.getPop()));
             }
-        }catch(NumberFormatException e){}
+        }catch(NumberFormatException ignored){}
     }
 
     private void buttonGenerPDF(){
@@ -225,7 +207,7 @@ public class LoanPayment extends Application {
             DepositDTO dto = new DepositDTO(vznos,procentStav,popolnenie,srokvklad,replenishmentOrPayment);
             Calc call = new Calc(dto);
             call.generationPdf();
-        }catch(NumberFormatException e){}
+        }catch(NumberFormatException ignored){}
     }
     public void resetCalc(){
         principalTextField.setText("");
@@ -250,7 +232,7 @@ public class LoanPayment extends Application {
             }
             return null;
         };
-        tf.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, integerFilter));
+        tf.setTextFormatter(new TextFormatter<>(new IntegerStringConverter(), null, integerFilter));
     }
 
     private static void onlyNumberWithZeroTextField(TextField tf){
@@ -262,6 +244,6 @@ public class LoanPayment extends Application {
             }
             return null;
         };
-        tf.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, integerFilter));
+        tf.setTextFormatter(new TextFormatter<>(new IntegerStringConverter(), null, integerFilter));
     }
 }
